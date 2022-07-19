@@ -1,9 +1,19 @@
-import { addTwoNumbers } from "./listNode";
+import { addTwoNumbers } from "./addTwoNumbers";
+import { findMedianSortedArrays } from "./findMedianSortedArrays";
+import { lengthOfLongestSubstring } from "./lengthOfLongestSubstring";
+import { longestPalindrome } from "./longestPalindrome";
 import { reverseNumber } from "./reverseNumber";
+import { strLength } from "./strLength";
 import { twoSum } from "./twoSum";
+import { average } from "./average";
 
-export class LeetCodeSolutions {
-  static addTwoNumbers = addTwoNumbers;
-  static reverseNumber = reverseNumber;
-  static twoSum = twoSum;
-}
+export const LeetCode = {
+  addTwoNumbers,
+  average,
+  findMedianSortedArrays,
+  lengthOfLongestSubstring,
+  longestPalindrome,
+  reverseNumber,
+  strLength,
+  twoSum,
+};
