@@ -20,12 +20,28 @@ describe(DESC, () => {
     expect(MAIN).toBeDefined();
   });
 
-  MAIN.METHODS_ALL.map(
-    ({ desc, func, value }: { desc: S; func: any; value: any }, index: N) => {
-      it(`${index}: ${desc}`, () => {
-        const result = func(value || desc);
-        check(result);
-      });
-    }
-  );
+  // MAIN.METHODS_ALL.map(
+  //   ({ desc, func, value }: { desc: S; func: any; value: any }, index: N) => {
+  //     it(`${index}: ${desc}`, () => {
+  //       const result = func(value || desc);
+  //       check(result);
+  //     });
+  //   }
+  // );
+
+  MAIN.METHODS_ALL.map(({ desc, func, value = desc }, index) => {
+    it(desc, () => {
+      let time = perf();
+
+      expect(desc).toBeDefined();
+      // expect(func).toBeDefined();
+      // expect(index).toBeDefined();
+      // expect(value).toBeDefined();
+      // expect(result).toBeDefined();
+
+      time = perf(time);
+
+      console.info({ index, desc, time, value });
+    });
+  });
 });

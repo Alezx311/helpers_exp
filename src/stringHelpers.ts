@@ -1,4 +1,4 @@
-import { A, N, S, F } from "../global";
+import { A, N, S } from "../global";
 import { Constants } from "../src/constants";
 
 const DESC = "StringHelpers";

@@ -18,7 +18,12 @@ export const METHODS_ALL = [
   { desc: "warn", func: warn },
   { desc: "trace", func: trace },
   { desc: "group", func: group },
-];
+].map(({ desc, func }, index) => ({
+  desc,
+  func,
+  index,
+  value: `${index}: ${desc}`,
+}));
 
 /**
  * It takes a string as an argument, and then calls the `getStats` function to get the stats object,
@@ -32,3 +37,20 @@ export const all = (value: string) => {
     func({ message: `${index}: Example of ${desc} log`, stats, value });
   });
 };
+
+export class LogHelpers {
+  static METHODS_ALL = METHODS_ALL;
+
+  static getStats = getStats;
+  static all = all;
+
+  static log = console.log;
+  static info = console.info;
+  static dir = console.dir;
+  static debug = console.debug;
+  static table = console.table;
+  static error = console.error;
+  static warn = console.warn;
+  static trace = console.trace;
+  static group = console.group;
+}

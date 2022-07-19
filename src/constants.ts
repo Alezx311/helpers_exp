@@ -5,8 +5,7 @@ import { A, N, S } from "../global";
  * in.
  * @param {N} time - N
  */
-export const getPerformance = (time?: N) =>
-  time ? performance.now() : performance.now() - time;
+export const getPerformance = (time: N = 0) => performance.now() - ~~time;
 
 /**
  * It returns an object with the source of the value and the type and size of the value

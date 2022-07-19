@@ -1,26 +1,17 @@
 import { N, S } from "../global";
-import { ArrayHelpers } from "../src/arrayHelpers";
+import { AllHelpers } from "../src/all";
 import { Constants } from "../src/constants";
 
-const DESC = `ArrayHelpers`;
-const MAIN = ArrayHelpers;
+const DESC = `AllHelpers`;
+const MAIN = AllHelpers;
 const perf = Constants.getPerformance;
 
-const check = (result: any) => {
-  let time = perf();
-
-  expect(result).toBeDefined();
-  expect(result).toBeTruthy();
-
-  time = perf(time);
-};
-
 describe(DESC, () => {
-  it(`${DESC} should be defined`, () => {
+  it("should be defined", () => {
     expect(MAIN).toBeDefined();
   });
 
-  MAIN.METHODS_ALL.map(({ desc, func, value = desc }: any, index) => {
+  MAIN.METHODS_ALL.map(({ desc, func, value = desc }, index) => {
     it(desc, () => {
       let time = perf();
 
