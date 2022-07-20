@@ -3,7 +3,6 @@ import { findMedianSortedArrays } from "./findMedianSortedArrays";
 import { lengthOfLongestSubstring } from "./lengthOfLongestSubstring";
 import { longestPalindrome } from "./longestPalindrome";
 import { reverseNumber } from "./reverseNumber";
-import { AllHelpers } from "./all";
 import { ArrayHelpers } from "./arrayHelpers";
 import { Constants } from "./constants";
 import { TypeHelpers } from "./typeHelpers";
@@ -15,7 +14,6 @@ export const SOURCE = Constants.getSource(__filename);
 SOURCE.name = `LeetCode`;
 
 export const EXAMPLES = Constants.mapExamples([
-  ...AllHelpers.EXAMPLES,
   ...ArrayHelpers.EXAMPLES,
   ...Constants.EXAMPLES,
   ...TypeHelpers.EXAMPLES,
@@ -36,7 +34,6 @@ export class LeetCode {
 
   static Constants = Constants;
 
-  static AllHelpers = AllHelpers;
   static ArrayHelpers = ArrayHelpers;
   static TypeHelpers = TypeHelpers;
   static LogHelpers = LogHelpers;

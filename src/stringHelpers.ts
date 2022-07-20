@@ -1,357 +1,182 @@
 import { A, N, O, S } from "../global";
 import { Constants } from "../src/constants";
+import { TypeHelpers } from "./typeHelpers";
 
 export const SOURCE = Constants.getSource(__filename);
 SOURCE.name = `StringHelpers`;
 
-export const { STRING, UNDEFINED, FUNCTION, NULL, OBJECT, ARRAY, DESC } =
-  Constants;
-export const STR = `${STRING}`;
-export const OBJ = { ...OBJECT };
-export const ARR = [...ARRAY];
+const { len } = TypeHelpers;
+const { RegExp, Paths, Numbers, ValueTypes } = Constants;
+export const {
+  ALL,
+  LINE,
+  CHARS_ONLY,
+  NUMBERS_ONLY,
+  CHARS_AND_NUMBERS,
+  NOT_CHARS_AND_NUMBERS,
+} = RegExp;
+export const {
+  DIR_ROOT,
+  FILE,
+  DIR,
+  DIR_CURRENT,
+  DIR_PREV,
+  DIRNAME_SRC,
+  DIRNAME_TESTS,
+  DIRNAME_LOGS,
+  PATHS_ROOT,
+  PATHS_CURRENT,
+  PATHS_SRC,
+  PATHS_TESTS,
+} = Paths;
+export const {
+  MIN,
+  MAX,
+  MAX_VALUE,
+  MIN_VALUE,
+  MAX_SAFE_VALUE,
+  MIN_SAFE_VALUE,
+  _RANDOM,
+  RANDOM_BOOLEAN,
+  RANDOM_MULT,
+  RANDOM_SIZE,
+  RANDOM_INT,
+  RANGE_RANDOM,
+  RANGE_VALUES,
+  RANGE_SAFE,
+  NUMS,
+} = Numbers;
+export const {
+  UNDEFINED,
+  NULL,
+  BOOLEAN,
+  STRING,
+  NUMBER,
+  ARRAY,
+  OBJECT,
+  FUNCTION,
+  PRIMITIVES,
+} = ValueTypes;
+const STR = SOURCE.name;
+const TYPE = typeof STR;
+const OBJ = { ...SOURCE, index: 0, value: STR };
+const ARR = Array(RANDOM_SIZE)
+  .fill(MAX)
+  .map((v) => ~~(v * _RANDOM));
 
-/**
- * It returns the current time in milliseconds, or the difference between the current time and the time
- * passed in as an argument
- * @param {N} [v] - The value to be passed in.
- */
-export const perf = (v?: N) => (v ? performance.now() - v : performance.now());
-
-/**
- * This function returns the current date and time in milliseconds.
- */
-export const toDateNow = (v: any = null) => Date.now();
-
-/**
- * ToDateStamp() returns a string of the current date and time in UTC format.
- */
-export const toDateStamp = (v: any = null) =>
-  new Date(Date.now()).toUTCString();
-
-/**
- * It returns the current date in ISO format.
- */
-export const toDateISO = (v: any = null) => new Date(Date.now()).toISOString();
-
-/**
- * It returns the type of the value passed to it
- * @param {any} v - any - the value to be checked
- */
-export const toType = (v: any) => typeof v;
-
-/**
- * If the type of the value is a string, return true, otherwise return false.
- * @param {any} v - any - the value to check
- */
-export const isTypeStr = (v: any) => toType(v) === "string";
-
-/**
- * If the type of the value is a number, return true, otherwise return false.
- * @param {any} v - any - The value to check the type of.
- */
-export const isTypeNum = (v: any) => toType(v) === "number";
-
-/**
- * If the type of the value is a function, return true, otherwise return false.
- * @param {any} v - any - the value to check
- */
-export const isTypeFunc = (v: any) => toType(v) === "function";
-
-/**
- * If the type of the value is an object, return true, otherwise return false.
- * @param {any} v - any - the value to check
- */
-export const isTypeObj = (v: any) => toType(v) === "object";
-
-/**
- * If the type of the value is null, return true.
- * @param {any} v - any - The value to check the type of.
- */
-export const isTypeNull = (v: any) => v === null;
-
-/**
- * If the type of the value is undefined, return true, otherwise return false.
- * @param {any} v - any - The value to check the type of.
- */
+export const toDateNow = () => Date.now();
+export const toDateStamp = () => new Date(Date.now()).toUTCString();
+export const toDateISO = () => new Date(Date.now()).toISOString();
+export const toType = (v: any = STR) => typeof v;
+export const isTypeStr = (v: any = STR) => toType(v) === "string";
+export const isTypeNum = (v: any = NUMBER) => toType(v) === "number";
+export const isTypeFunc = (v: any = FUNCTION) => toType(v) === "function";
+export const isTypeObj = (v: any = OBJECT) => toType(v) === "object";
+export const isTypeNull = (v: any = NULL) => v === null;
 export const isTypeUnd = (v: any = UNDEFINED) => !v && v === undefined;
-
-/**
- * "toKey" returns a string that is a combination of the current date and time, and the type of the
- * value passed to it
- * @param {any} v - any - the value to be converted to a key
- */
-export const toKey = (v: any) => toCharsLatin(`_${toDateNow()}_${toType(v)}`);
-
-/**
- * "Given a string, return an array of strings, each of which is a line from the original string."
- *
- * The function is written in TypeScript, which is a superset of JavaScript. The first line of the
- * function is a comment. The second line is a TypeScript type annotation. The third line is the
- * function definition
- * @param {S} v - S
- */
-export const toLines = (v: S) => v.split("\n");
-
-/**
- * It takes a string and returns an array of strings
- * @param {S} v - S
- */
-export const toTabs = (v: S) => v.split("\t");
-
-/**
- * It takes a string and returns an array of words
- * @param {S} v - S
- */
-export const toWords = (v: S) => v.split(" ");
-
-/**
- * "Convert a string to a string of only latin characters, numbers, and underscores."
- *
- * The above function is a good example of a function that is easy to understand, and easy to use
- * @param {S} s - S - the string to be converted
- */
-export const toCharsLatin = (s: S) => s.replace(/[^a-z0-9_]/gim, "").trim();
-
-/**
- * Replace all characters that are not a-z, 0-9, underscore, backslash, space, period, or comma with
- * nothing, and trim the example.
- * @param {S} s - S - the string to be converted
- */
-export const toCharsValid = (s: S) =>
+export const toKey = (v: any = STR) =>
+  toCharsLatin(`_${toDateNow()}_${toType(v)}`);
+export const toLines = (v: S = STR) => v.split("\n");
+export const toTabs = (v: S = STR) => v.split("\t");
+export const toWords = (v: S = STR) => v.split(" ");
+export const toCharsLatin = (s: S = STR) =>
+  s.replace(/[^a-z0-9_]/gim, "").trim();
+export const toCharsValid = (s: S = STR) =>
   s.replace(/[^a-z0-9_\\s.,]/gim, "").trim();
-
-/**
- * It takes a string and returns an array of characters
- * @param {S} s - S - the string to be converted to an array of characters
- */
-export const toCharsArray = (s: S) => s.split("");
-
-/**
- * Convert a string to an array of unique characters.
- * @param {S} s - S - the string to be converted to an array of characters
- */
-export const toUnical = (s: S) => [
+export const toCharsArray = (s: S = STR) => s.split("");
+export const toUnical = (s: S = STR) => [
   ...new Set(...toCharsArray(s).filter(Boolean)),
 ];
-
-/**
- * It takes a string and returns a new string with the characters in reverse order
- * @param {S} s - S - the string to reverse
- */
-export const toReversed = (s: S) => toCharsArray(s).reverse().join("");
-
-/**
- * `toLen` returns the length of a string or array, or `0` if the input is `null` or `undefined`
- * @param {S | A} s - S | A
- */
-export const toLen = (s: S | A) => ~~s?.length;
-
-/**
- * It takes a string and returns a trimmed string
- * @param {S} s - S - the input string
- */
-export const toTrimmed = (s: S) => s.trim();
-
-/**
- * It takes a value and returns a stringified version of an object containing that value
- * @param {any} value - any - The value to be converted to a string.
- */
-export const toObjStr = (value: any) => JSON.stringify({ value }, null, "\t");
-
-/**
- * ToLongest() returns the longest string in a list of strings.
- * @param {S[]} s - S[]
- */
+export const toReversed = (s: S = STR) => toCharsArray(s).reverse().join("");
+export const toLen = (s: S | A = STR) => ~~s?.length;
+export const toTrimmed = (s: S = STR) => s.trim();
+export const toObjStr = (value: any = STR) =>
+  JSON.stringify({ value }, null, "\t");
 export const toLongest = (...s: S[]) =>
   s.sort((a, b) => (toLen(a) > toLen(b) ? 1 : -1))[0];
-
-/**
- * IsValidStr returns true if the given string is a non-empty string.
- * @param {S} s - S - the string to check
- */
-export const isValidStr = (s: S) => isTypeStr(s) && toLen(toTrimmed(s)) > 0;
-
-/**
- * IsValidLength" returns true if the string "s" is a string, has a length greater than "min" and less
- * than "max
- * @param {S} s - The string to check
- * @param {N} [max=2000] - The maximum length of the string.
- * @param {N} [min=1] - The minimum length of the string.
- */
-export const isValidLength = (s: S, min: N = 1, max: N = 2000) =>
+export const isValidStr = (s: S = STR) =>
+  isTypeStr(s) && toLen(toTrimmed(s)) > 0;
+export const isValidLength = (s: S = STR, min: N = 1, max: N = 2000) =>
   isTypeStr(s) && toLen(s) > min && toLen(s) < max;
-
-/**
- * "If the string is valid, return true if the string is equal to its reversed version."
- *
- * The function isValidStr is a helper function that checks if the string is valid
- * @param {S} s - S - the string to check
- */
-export const isPalindrome = (s: S) => isValidStr(s) && s === toReversed(s);
-
-/**
- * Returns true if the given string includes all of the given characters
- * @param {S} s - The string to check
- * @param {S[]} chars - The characters to check for.
- */
-export const isIncludeChars = (s: S, chars: S[] = [s]) =>
+export const isPalindrome = (s: S = STR) =>
+  isValidStr(s) && s === toReversed(s);
+export const isIncludeChars = (s: S = STR, chars: S[] = [""]) =>
   chars.every((c) => s.includes(c));
-
-/**
- * IsTrimmed returns true if the given string is valid and trimmed.
- * @param {S} s - S - the string to check
- */
-export const isTrimmed = (s: S) => isValidStr(s) && s === toTrimmed(s);
-
-/**
- * It takes a value of type S and returns an object with a value property and a key property
- * @param {S} value - S
- */
-export const toStats = (value: S) => ({ value, key: toKey(value) });
-
-/**
- * It takes a list of arguments and returns an object with a size property and a values property
- * @param {A} args - A
- */
-export const toObj = (...args: A) => ({ size: toLen(args), values: args });
-
-/**
- * SubStr takes a string, a start index, and an end index, and returns a substring of the string from
- * the start index to the end index.
- * @param {S} str - The string to be sliced.
- * @param {N} start - The index of the first character to include in the returned substring.
- * @param {N} end - The end index of the substring. If omitted, the function takes the rest of the
- * string.
- */
-export const subStr = (str: S, start: N = 0, end: N = toLen(str) - 1) =>
+export const isTrimmed = (s: S = STR) => isValidStr(s) && s === toTrimmed(s);
+export const toStats = (value: S = STR) => ({ value, key: toKey(value) });
+export const toObj = (...args: any[]) => ({ size: toLen(args), values: args });
+export const subStr = (str: S = STR, start: N = 0, end: N = toLen(str) - 1) =>
   str.substring(start, end);
-
-/**
- * It takes a string and returns an array of all the substrings of that string
- * @param {S} str - The string to split into substrings.
- * @param filter - (v: S) => boolean = isValidStr
- * @returns An array of all substrings of the input string.
- */
-export const toSubParts = (str: S, filter: (v: S) => boolean = isValidStr) => {
+export const toSubParts = (str: S = STR, filter = isValidStr) => {
   const parts = [str];
-
   for (let i = 0; i < toLen(str); i++) {
     for (let e = i + 1; e < toLen(str); e++) {
       parts.push(subStr(str, i, e));
     }
   }
-
   return [...new Set(...parts.filter(filter))];
 };
-
-/**
- * It takes a string and returns an object with the string, its length, an array of its characters, and
- * an array of its subparts
- * @param {S} str - The string to be analyzed.
- * @returns An object with the following properties:
- *   - str: the original string
- *   - length: the length of the string
- *   - chars: an array of the characters in the string
- *   - parts: an array of the substrings in the string
- */
-export const strStat = (str: S) => {
+export const strStat = (str: S = STR) => {
   const length = toLen(str);
   const chars = toCharsArray(str);
   const parts = toSubParts(str);
-
   return { str, length, chars, parts };
 };
-
-/**
- * "matchAll" returns the first match of a regular expression
- * @param {S} [v] - The value to be matched.
- */
-export const matchAll = (v: S) => `${v?.match(/.+/gim)}`;
-
-/**
- * "matchAllLatin" returns the first match of all latin characters in a string
- * @param {S} [v] - The value to be matched.
- */
-export const matchAllLatin = (v: S) => `${v?.match(/[a-z]+/gim)}`;
-
-/**
- * "matchAllKyr" returns the first match of alllKyr characters in a string
- * @param {S} [v] - S - the value to be matched
- */
-export const matchAllKyr = (v: S) => `${v?.match(/[а-я]+/gim)}`;
-
-/**
- * It returns the first match of alllKyr characters in a string
- * @param {S} [v] - S - the value to be matched
- */
-export const matchAllInt = (v: S) => `${v?.match(/[0-9]+/gim)}`;
-
-/**
- * MatchAllNumbers returns the first match of all numbers in a string.
- * @param {S} [v] - The value to be matched.
- */
-export const matchAllSpec = (v: S) =>
-  `${v?.match(/[\\s\\n\\t!@#$%^&*()_+]+/gim)}`;
-
-/**
- * It returns the first match of the regular expression `/^.+$/gim` against the input string
- * @param {S} [v] - The value to be matched.
- */
-export const matchAllLines = (v: S) => `${v?.match(/^.+$/gim)}`;
+export const matchAll = (v: S = STR) => isTypeStr(v) && v.match(/.+/gim);
+export const matchAllLatin = (v: S = STR) =>
+  isTypeStr(v) && v.match(/[a-z]+/gim);
+export const matchAllKyr = (v: S = STR) => isTypeStr(v) && v.match(/[а-я]+/gim);
+export const matchAllInt = (v: S = STR) => isTypeStr(v) && v.match(/[0-9]+/gim);
+export const matchAllSpec = (v: S = STR) =>
+  isTypeStr(v) && v.match(/[\\s\\n\\t!@#$%^&*()_+]+/gim);
+export const matchAllLines = (v: S = STR) => isTypeStr(v) && v.match(/^.+$/gim);
 
 export const EXAMPLES = Constants.mapExamples([
-  { desc: "perf", func: perf, result: perf() },
   { desc: "toDateNow", func: toDateNow, result: toDateNow() },
   { desc: "toDateStamp", func: toDateStamp, result: toDateStamp() },
   { desc: "toDateISO", func: toDateISO, result: toDateISO() },
-  { desc: "toType", func: toType, result: toType(STR) },
-  { desc: "isTypeStr", func: isTypeStr, result: isTypeStr(STR) },
-  { desc: "isTypeNum", func: isTypeNum, result: isTypeNum(1) },
-  { desc: "isTypeFunc", func: isTypeFunc, result: isTypeFunc(FUNCTION) },
-  { desc: "isTypeObj", func: isTypeObj, result: isTypeObj(OBJ) },
-  { desc: "isTypeNull", func: isTypeNull, result: isTypeNull(NULL) },
-  { desc: "isTypeUnd", func: isTypeUnd, result: isTypeUnd(UNDEFINED) },
-  { desc: "toKey", func: toKey, result: toKey(STR) },
-  { desc: "toLines", func: toLines, result: toLines(STR) },
-  { desc: "toTabs", func: toTabs, result: toTabs(STR) },
-  { desc: "toWords", func: toWords, result: toWords(STR) },
-  { desc: "toCharsLatin", func: toCharsLatin, result: toCharsLatin(STR) },
-  { desc: "toCharsValid", func: toCharsValid, result: toCharsValid(STR) },
-  { desc: "toCharsArray", func: toCharsArray, result: toCharsArray(STR) },
-  { desc: "toUnical", func: toUnical, result: toUnical(STR) },
-  { desc: "toReversed", func: toReversed, result: toReversed(STR) },
-  { desc: "toLen", func: toLen, result: toLen(STR) },
-  { desc: "toTrimmed", func: toTrimmed, result: toTrimmed(STR) },
-  { desc: "toObjStr", func: toObjStr, result: toObjStr(STR) },
-  { desc: "toLongest", func: toLongest, result: toLongest(STR) },
-  { desc: "isValidStr", func: isValidStr, result: isValidStr(STR) },
-  { desc: "isValidLength", func: isValidLength, result: isValidLength(STR) },
-  {
-    desc: "isPalindrome",
-    func: isPalindrome,
-    result: isPalindrome(Constants.PALINDROME),
-  },
-  { desc: "isIncludeChars", func: isIncludeChars, result: isIncludeChars(STR) },
-  { desc: "isTrimmed", func: isTrimmed, result: isTrimmed(STR) },
-  { desc: "toStats", func: toStats, result: toStats(STR) },
-  { desc: "toObj", func: toObj, result: toObj(STR) },
-  { desc: "subStr", func: subStr, result: subStr(STR) },
-  { desc: "toSubParts", func: toSubParts, result: toSubParts(STR) },
-  { desc: "strStat", func: strStat, result: strStat(STR) },
-  { desc: "matchAll", func: matchAll, result: matchAll(STR) },
-  { desc: "matchAllLatin", func: matchAllLatin, result: matchAllLatin(STR) },
-  { desc: "matchAllKyr", func: matchAllKyr, result: matchAllKyr(STR) },
-  { desc: "matchAllInt", func: matchAllInt, result: matchAllInt(STR) },
-  { desc: "matchAllSpec", func: matchAllSpec, result: matchAllSpec(STR) },
-  { desc: "matchAllLines", func: matchAllLines, result: matchAllLines(STR) },
+  { desc: "toType", func: toType, result: toType() },
+  { desc: "isTypeStr", func: isTypeStr, result: isTypeStr() },
+  { desc: "isTypeNum", func: isTypeNum, result: isTypeNum() },
+  { desc: "isTypeFunc", func: isTypeFunc, result: isTypeFunc() },
+  { desc: "isTypeObj", func: isTypeObj, result: isTypeObj() },
+  { desc: "isTypeNull", func: isTypeNull, result: isTypeNull() },
+  { desc: "isTypeUnd", func: isTypeUnd, result: isTypeUnd() },
+  { desc: "toKey", func: toKey, result: toKey() },
+  { desc: "toLines", func: toLines, result: toLines() },
+  { desc: "toTabs", func: toTabs, result: toTabs() },
+  { desc: "toWords", func: toWords, result: toWords() },
+  { desc: "toCharsLatin", func: toCharsLatin, result: toCharsLatin() },
+  { desc: "toCharsValid", func: toCharsValid, result: toCharsValid() },
+  { desc: "toCharsArray", func: toCharsArray, result: toCharsArray() },
+  { desc: "toUnical", func: toUnical, result: toUnical() },
+  { desc: "toReversed", func: toReversed, result: toReversed() },
+  { desc: "toLen", func: toLen, result: toLen() },
+  { desc: "toTrimmed", func: toTrimmed, result: toTrimmed() },
+  { desc: "toObjStr", func: toObjStr, result: toObjStr() },
+  { desc: "toLongest", func: toLongest, result: toLongest() },
+  { desc: "isValidStr", func: isValidStr, result: isValidStr() },
+  { desc: "isValidLength", func: isValidLength, result: isValidLength() },
+  { desc: "isPalindrome", func: isPalindrome, result: isPalindrome() },
+  { desc: "isIncludeChars", func: isIncludeChars, result: isIncludeChars() },
+  { desc: "isTrimmed", func: isTrimmed, result: isTrimmed() },
+  { desc: "toStats", func: toStats, result: toStats() },
+  { desc: "toObj", func: toObj, result: toObj() },
+  { desc: "subStr", func: subStr, result: subStr() },
+  { desc: "toSubParts", func: toSubParts, result: toSubParts() },
+  { desc: "strStat", func: strStat, result: strStat() },
+  { desc: "matchAll", func: matchAll, result: matchAll() },
+  { desc: "matchAllLatin", func: matchAllLatin, result: matchAllLatin() },
+  { desc: "matchAllKyr", func: matchAllKyr, result: matchAllKyr() },
+  { desc: "matchAllInt", func: matchAllInt, result: matchAllInt() },
+  { desc: "matchAllSpec", func: matchAllSpec, result: matchAllSpec() },
+  { desc: "matchAllLines", func: matchAllLines, result: matchAllLines() },
 ]);
-
 export class StringHelpers {
   static SOURCE = SOURCE;
   static EXAMPLES = EXAMPLES;
-  static TEST_VALUES = { SOURCE, DESC, ARR, STR, OBJ };
+  static TEST_VALUES = { SOURCE, ARR, STR, OBJ };
 
-  static perf = perf;
   static toDateNow = toDateNow;
   static toDateStamp = toDateStamp;
   static toDateISO = toDateISO;

@@ -1,13 +1,18 @@
-export type F = () => {} | { (): {} };
 export type TestData<T1, T2> = {
   description: string;
   func: F | any;
   values: A<{ input: T1; expected: T2; desc?: S }>;
 };
+export type F<T = any, R = any> = (v: T) => R | { (v: T): R };
+export type HasLength = (A | S) & { length: N };
+export type Truthy<T = any> = NonNullable<T>;
+export type NOT = null | undefined;
 export type S = string;
 export type N = number;
+export type B = boolean;
 export type A<T = any> = Array<T>;
 export type O = Record<S, unknown>;
+
 export enum MESSAGES {
   DESCRIPTION = "Description",
   EMPTY = "",

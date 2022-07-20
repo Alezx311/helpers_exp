@@ -4,183 +4,124 @@ import { Constants } from "../src/constants";
 export const SOURCE = Constants.getSource(__filename);
 SOURCE.name = `ArrayHelpers`;
 
-export const { STRING, OBJECT, ARRAY, DESC } = Constants;
-export const STR = `${STRING}`;
-export const OBJ = { ...OBJECT };
-export const ARR = [...ARRAY];
+const { RegExp, Paths, Numbers, ValueTypes } = Constants;
+export const {
+  ALL,
+  LINE,
+  CHARS_ONLY,
+  NUMBERS_ONLY,
+  CHARS_AND_NUMBERS,
+  NOT_CHARS_AND_NUMBERS,
+} = RegExp;
+export const {
+  DIR_ROOT,
+  FILE,
+  DIR,
+  DIR_CURRENT,
+  DIR_PREV,
+  DIRNAME_SRC,
+  DIRNAME_TESTS,
+  DIRNAME_LOGS,
+  PATHS_ROOT,
+  PATHS_CURRENT,
+  PATHS_SRC,
+  PATHS_TESTS,
+} = Paths;
+export const {
+  MIN,
+  MAX,
+  MAX_VALUE,
+  MIN_VALUE,
+  MAX_SAFE_VALUE,
+  MIN_SAFE_VALUE,
+  _RANDOM,
+  RANDOM_BOOLEAN,
+  RANDOM_MULT,
+  RANDOM_SIZE,
+  RANDOM_INT,
+  RANGE_RANDOM,
+  RANGE_VALUES,
+  RANGE_SAFE,
+  NUMS,
+} = Numbers;
+export const {
+  UNDEFINED,
+  NULL,
+  BOOLEAN,
+  STRING,
+  NUMBER,
+  ARRAY,
+  OBJECT,
+  FUNCTION,
+  PRIMITIVES,
+} = ValueTypes;
+const STR = SOURCE.name;
+const TYPE = typeof STR;
+const OBJ = { ...SOURCE, index: 0, value: STR };
+const ARR = Array(RANDOM_SIZE)
+  .fill(MAX)
+  .map((v) => ~~(v * _RANDOM));
 
-/**
- * It returns an array of objects with the value, index, and type of each element in the array.
- * @param {A} arr - A - an array of any type
- * @param {F} func - F - a function that takes a value and returns a value
- */
-export const mapByFunc = (arr: A, func: () => any) =>
+export const mapByFunc = (arr: A = ARR, func = (v: any) => !!v) =>
   arr.map((value, index) => ({ value, index, func }));
 
-/**
- * It takes an array of values and returns an array of objects with the value and index of each value
- * @param {A} arr - A
- */
-export const mapByValue = (arr: A) =>
+export const mapByValue = (arr: A = ARR) =>
   arr.map((value, index) => ({ value, index }));
 
-/**
- * "Convert a value to an array."
- *
- * The function takes a single argument, v, and returns an array containing v
- * @param {any} v - any
- */
-export const toArr = (v: any) => [v];
-
-/**
- *? It takes an array, and returns a new array with the same elements, but in a random order
- * @param {A} arr - The array to be sorted.
- */
-export const sortRandom = (arr: any[] = []) =>
+export const sortRandom = (arr: A = ARR) =>
   arr.sort((a, b) => (~~(Math.random() - 0.5) ? 1 : -1));
 
-/**
- *? SortLength takes an array of strings and returns a new array of strings sorted by length
- * @param {A} arr - A
- */
-export const sortLength = (arr: any[] = []) =>
+export const sortLength = (arr: A = ARR) =>
   arr.sort((a: any[] | S, b: any[] | S) => (a.length > b.length ? 1 : -1));
 
-/**
- *? Sort the array in ascending order, and return the sorted array.
- * @param {A} arr - A - The array to sort.
- */
-export const sortBigger = (arr: any[] = []) =>
+export const sortBigger = (arr: A = ARR) =>
   arr.sort((a: S | N, b: S | N) => (a > b ? 1 : -1));
 
-/**
- *? "toSorted" takes an array of numbers and returns a sorted version of that array
- * @param {A} arr - A
- */
-export const toSorted = (arr: any[] = []) => arr.sort();
+export const toSorted = (arr: A = ARR) => arr.sort();
 
-/**
- *? It takes an array of arrays and returns a single array with all the elements of the original arrays
- * @param {A[]} arrs - A[]
- */
 export const toMerged = (...arrs: A[]) =>
   arrs.reduce((acc, v) => [...acc, ...v], []);
 
-/**
- *? It takes an array of arrays and returns a single array with all the elements of the original arrays
- * @param {A[]} arrs - A[]
- */
 export const toFlat = (...arrs: A[]) => [...arrs].flat(Infinity);
 
-/**
- *? It takes an array and returns an array of objects with the value and index of each item in the
- * original array
- * @param {A} arr - A
- */
-export const mapByIndex = (arr: any[] = []) =>
+export const mapByIndex = (arr: A = ARR) =>
   arr.reduce((value, index) => ({ value, index }));
 
-/**
- *? It takes an object and an index, and returns a new object with the index added to it
- * @param {O} values - O - The object to add the index property to.
- * @param {N} index - N
- */
-export const addIndexProp = (arr: any[] = []) =>
+export const addIndexProp = (arr: A = ARR) =>
   arr.map((value: any, index: N) => ({
     value,
     index,
   }));
 
-/**
- *? It takes an array of any type and returns an array of objects with the value, index, and type of
- * each item in the array
- * @param {A} arr - A
- */
-export const mapByType = (arr: any[] = []) =>
+export const mapByType = (arr: A = ARR) =>
   arr.reduce((value, index) => ({ value, index, type: typeof value }));
 
-/**
- *? It takes an array of arrays and returns a new array with all the duplicates removed
- * @param {A} arr - A - The array to be converted to a unical array.
- */
-export const toUnical = (arr: any[] = []) => [...new Set(arr)];
+export const toUnical = (arr: A = ARR) => [...new Set(arr)];
 
-/**
- *? Return a random index from an array.
- * @param {A} arr - The array to get a random index from.
- */
-export const arrRandomIndex = (arr: any[] = []) =>
-  arr.length <= 1 ? 0 : ~~(Math.random() * arr.length - 1);
-
-/**
- *? Return a random element from an array.
- * @param {A} arr - A
- */
-export const arrRandomElement = (arr: any[]) =>
-  arr[arrRandomIndex(arr)] || arr[0];
-
-/**
- *? Filter out all the falsy values from an array.
- * @param {A} arr - A
- */
-export const arrFilterValid = (arr: any[] = []) => arr.filter(Boolean);
-
-/**
- *? Filter an array to a maximum length.
- * @param {A} arr - A
- * @param {N} max - N = arr.length
- */
-export const arrFilterMaxLength = (arr: any[] = [], max: N = arr.length - 1) =>
-  arr.filter((v, i) => i < max);
-
-/**
- *? It takes an array of any type, and returns an array of objects with the value, index, and type of
- * each item in the array
- * @param {A} arr - A
- */
-export const arrMapByTypes = (arr: any[] = []) =>
-  arr.map((value, index) => ({ value, index, type: typeof value }));
+export const arrFilterValid = (arr: A = ARR) => arr.filter(Boolean);
 
 export const EXAMPLES = Constants.mapExamples([
-  {
-    desc: "mapByFunc",
-    func: mapByFunc,
-    result: mapByFunc(ARR, (v?: any) => v),
-  },
-  { desc: "mapByValue", func: mapByValue, result: mapByValue(ARR) },
-  { desc: "toArr", func: toArr, result: toArr(ARR) },
-  { desc: "sortRandom", func: sortRandom, result: sortRandom(ARR) },
-  { desc: "sortLength", func: sortLength, result: sortLength(ARR) },
-  { desc: "sortBigger", func: sortBigger, result: sortBigger(ARR) },
-  { desc: "toSorted", func: toSorted, result: toSorted(ARR) },
-  { desc: "toMerged", func: toMerged, result: toMerged(ARR) },
-  { desc: "toFlat", func: toFlat, result: toFlat(ARR) },
-  { desc: "mapByIndex", func: mapByIndex, result: mapByIndex(ARR) },
-  { desc: "addIndexProp", func: addIndexProp, result: addIndexProp(ARR) },
-  { desc: "mapByType", func: mapByType, result: mapByType(ARR) },
-  { desc: "toUnical", func: toUnical, result: toUnical(ARR) },
-  { desc: "arrRandomIndex", func: arrRandomIndex, result: arrRandomIndex(ARR) },
-  {
-    desc: "arrRandomElement",
-    func: arrRandomElement,
-    result: arrRandomElement(ARR),
-  },
-  { desc: "arrFilterValid", func: arrFilterValid, result: arrFilterValid(ARR) },
-  {
-    desc: "arrFilterMaxLength",
-    func: arrFilterMaxLength,
-    result: arrFilterMaxLength(ARR),
-  },
-  { desc: "arrMapByTypes", func: arrMapByTypes, result: arrMapByTypes(ARR) },
+  { desc: "mapByFunc", func: mapByFunc, result: mapByFunc() },
+  { desc: "mapByValue", func: mapByValue, result: mapByValue() },
+  { desc: "sortRandom", func: sortRandom, result: sortRandom() },
+  { desc: "sortLength", func: sortLength, result: sortLength() },
+  { desc: "sortBigger", func: sortBigger, result: sortBigger() },
+  { desc: "toSorted", func: toSorted, result: toSorted() },
+  { desc: "toMerged", func: toMerged, result: toMerged() },
+  { desc: "toFlat", func: toFlat, result: toFlat() },
+  { desc: "mapByIndex", func: mapByIndex, result: mapByIndex() },
+  { desc: "addIndexProp", func: addIndexProp, result: addIndexProp() },
+  { desc: "mapByType", func: mapByType, result: mapByType() },
+  { desc: "toUnical", func: toUnical, result: toUnical() },
+  { desc: "arrFilterValid", func: arrFilterValid, result: arrFilterValid() },
 ]);
 export class ArrayHelpers {
   static SOURCE = SOURCE;
   static EXAMPLES = EXAMPLES;
-  static TEST_VALUES = { SOURCE, DESC, ARR, STR, OBJ };
+  static TEST_VALUES = { SOURCE, ARR, STR, OBJ };
 
   static mapByFunc = mapByFunc;
   static mapByValue = mapByValue;
-  static toArr = toArr;
   static sortRandom = sortRandom;
   static sortLength = sortLength;
   static sortBigger = sortBigger;
@@ -191,8 +132,5 @@ export class ArrayHelpers {
   static addIndexProp = addIndexProp;
   static mapByType = mapByType;
   static toUnical = toUnical;
-  static arrRandomElement = arrRandomElement;
   static arrFilterValid = arrFilterValid;
-  static arrFilterMaxLength = arrFilterMaxLength;
-  static arrMapByTypes = arrMapByTypes;
 }
