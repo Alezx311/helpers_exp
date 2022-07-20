@@ -136,7 +136,7 @@ export class Constants {
     return ~~(Math.random() * (Constants.MAX - Constants.MIN) + Constants.MIN);
   }
 
-  EXAMPLES = mapExamples([
+  static EXAMPLES = mapExamples([
     {
       desc: "getSource",
       func: () => Constants.getSource,

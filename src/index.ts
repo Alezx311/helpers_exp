@@ -1,7 +1,7 @@
 import { Constants } from "./constants";
 import { ArrayHelpers } from "./arrayHelpers";
 import { FsHelpers } from "./fsHelpers";
-import * as FuncHelpers from "./func";
+import { FuncHelpers } from "./func";
 import { LogHelpers } from "./logHelpers";
 import { NumHelpers } from "./numHelpers";
 import { ObjectHelpers } from "./objHelpers";
@@ -13,6 +13,8 @@ export const SOURCE = Constants.getSource(__filename);
 SOURCE.name = `HelpersMain`;
 
 export const EXAMPLES = Constants.mapExamples([
+  ...Constants.EXAMPLES,
+  ...FuncHelpers.EXAMPLES,
   ...ArrayHelpers.EXAMPLES,
   ...FsHelpers.EXAMPLES,
   ...LogHelpers.EXAMPLES,
@@ -36,5 +38,5 @@ export class Helpers {
   static PathHelpers = PathHelpers;
   static StringHelpers = StringHelpers;
   static TypeHelpers = TypeHelpers;
-  static funcHelpers = FuncHelpers;
+  static FuncHelpers = FuncHelpers;
 }
