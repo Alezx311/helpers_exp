@@ -1,8 +1,8 @@
-import { LeetCode } from "../src/index";
+import { Helpers } from "../src/index";
 
-const SOURCE = LeetCode.LogHelpers.SOURCE;
-const DESC = LeetCode.LogHelpers.SOURCE.name;
-const MAIN = LeetCode.LogHelpers;
+const SOURCE = Helpers.LogHelpers.SOURCE;
+const DESC = Helpers.LogHelpers.SOURCE.name;
+const MAIN = Helpers.LogHelpers;
 
 describe(DESC, () => {
   it("should be defined", () => {
@@ -24,18 +24,18 @@ describe(DESC, () => {
 
   MAIN.EXAMPLES.map(({ desc, values, index, result }: any) => {
     it(desc, () => {
-     const valid = desc && result;
+      const valid = desc && result;
 
-     expect(desc).toBeDefined();
-     expect(values).toBeDefined();
-     expect(index).toBeDefined();
-     expect(result).toBeDefined();
+      expect(desc).toBeDefined();
+      expect(values).toBeDefined();
+      expect(index).toBeDefined();
+      expect(result).toBeDefined();
 
-     expect(values).not.toBeNull();
-     expect(index >= 0).not.toBeNull();
-     expect(desc).not.toBeNull();
-     expect(result).not.toBeNull();
-     expect(valid).not.toEqual(false);
+      expect(values).not.toBeNull();
+      expect(index >= 0).not.toBeNull();
+      expect(desc).not.toBeNull();
+      expect(result).not.toBeNull();
+      expect(valid).not.toEqual(false);
     });
   });
 });

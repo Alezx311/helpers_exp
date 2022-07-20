@@ -3,74 +3,19 @@ import { A, N, O, S, F, B } from "../global";
 import { inspect } from "util";
 import path from "path";
 
+const { RANDOM_SIZE, MAX, MIN, RANGE_RANDOM, CHARS_AND_NUMBERS, FUNCTION } =
+  Constants;
+
+const { ARR, OBJ, STR, objK, objV, objE } = Constants;
+
 const SOURCE = Constants.getSource(__filename);
 SOURCE.name = `Functions List`;
-
-const { objK, objV, objE, RegExp, Paths, Numbers, ValueTypes } = Constants;
-
-export const {
-  ALL,
-  LINE,
-  CHARS_ONLY,
-  NUMBERS_ONLY,
-  CHARS_AND_NUMBERS,
-  NOT_CHARS_AND_NUMBERS,
-} = RegExp;
-export const {
-  DIR_ROOT,
-  FILE,
-  DIR,
-  DIR_CURRENT,
-  DIR_PREV,
-  DIRNAME_SRC,
-  DIRNAME_TESTS,
-  DIRNAME_LOGS,
-  PATHS_ROOT,
-  PATHS_CURRENT,
-  PATHS_SRC,
-  PATHS_TESTS,
-} = Paths;
-export const {
-  MIN,
-  MAX,
-  MAX_VALUE,
-  MIN_VALUE,
-  MAX_SAFE_VALUE,
-  MIN_SAFE_VALUE,
-  _RANDOM,
-  RANDOM_BOOLEAN,
-  RANDOM_MULT,
-  RANDOM_SIZE,
-  RANDOM_INT,
-  RANGE_RANDOM,
-  RANGE_VALUES,
-  RANGE_SAFE,
-  NUMS,
-} = Numbers;
-export const {
-  UNDEFINED,
-  NULL,
-  BOOLEAN,
-  STRING,
-  NUMBER,
-  ARRAY,
-  OBJECT,
-  FUNCTION,
-  PRIMITIVES,
-} = ValueTypes;
-
-const STR = SOURCE.name;
-const TYPE = typeof STR;
-const OBJ = { ...SOURCE, index: 0, value: STR };
-const ARR = Array(RANDOM_SIZE)
-  .fill(MAX)
-  .map((v) => ~~(v * _RANDOM));
 
 //? Path
 export const getRoot = () => process.cwd();
 export const getDir = () => __filename;
 export const getFile = () => __dirname;
-export const getPathResolved = (arr: A<S> = [DIRNAME_SRC]) =>
+export const getPathResolved = (arr: A<S> = []) =>
   path.resolve(process.cwd(), ...arr);
 export const getPathJoin = (str: S = process.cwd()) =>
   path.join(__dirname, str);
@@ -164,7 +109,7 @@ export const toInspectAll = (value: any = STR): S =>
 export const toJsonPlain = (value: any = STR): S => JSON.stringify(value);
 export const toJson = (value: any = STR): S =>
   JSON.stringify(value, null, "\t");
-export const toDesc = (value: any = STR, desc: S = TYPE) =>
+export const toDesc = (value: any = STR, desc: S = Constants.TYPE) =>
   `${desc ?? type(value)}: ${value}`;
 export const toDescKey = (key: S = OBJ.key) => `Key: ${key}`;
 export const toDescIndex = (index: N = OBJ.index) => `Index: ${index}`;
@@ -217,7 +162,7 @@ export const filterByObj = (arr: A = ARR) => arr.filter(isObj);
 export const filterByValid = (arr: A = ARR) => arr.filter(Boolean);
 export const filterByStrings = (arr: A = ARR) => arr.filter(String);
 export const filterByNumber = (arr: A = ARR) => arr.filter(Number);
-export const filterByType = (arr: A = ARR, typeStr: S = TYPE) =>
+export const filterByType = (arr: A = ARR, typeStr: S = Constants.TYPE) =>
   arr.filter((value) => type(value) !== typeStr);
 export const reduceTypes = (arr: A = ARR) =>
   arr.reduce((a, value) => [...a, type(value)], []);

@@ -1,9 +1,9 @@
 import { N, TestData } from "../global";
-import { LeetCode } from "../src/index";
+import { Helpers } from "../src/index";
 
 const { description, func, values }: any = {
   description: `findMedianSortedArrays`,
-  func: LeetCode.findMedianSortedArrays,
+  func: Helpers.findMedianSortedArrays,
   values: [
     {
       input: [[3], [-1, -2]],

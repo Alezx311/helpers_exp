@@ -1,20 +1,12 @@
 import { inspect } from "util";
-import { A, N, O, S } from "../global";
-import { Constants } from "../src/constants";
+import { N, O } from "../global";
+import { Constants } from "./constants";
+
+const { OBJ, objK } = Constants;
 
 export const SOURCE = Constants.getSource(__filename);
-SOURCE.name = `ObjectHelpers`;
+SOURCE.name = `ObjHelpers`;
 
-export const { STRING, OBJECT, ARRAY } = Constants.ValueTypes;
-export const STR = `${STRING}`;
-export const OBJ = { ...OBJECT };
-export const ARR = [...ARRAY];
-
-export const objK = (obj: O = OBJ) => Object.keys(obj);
-export const objV = (obj: O = OBJ) => Object.values(obj);
-export const objE = (obj: O = OBJ) => Object.entries(obj);
-export const objF = (obj: O = OBJ) =>
-  Object.fromEntries([[SOURCE.name, __filename]]);
 export const objInspect = (obj: O = OBJ) => inspect(obj, true, 10, false);
 export const objToStr = (obj: O = OBJ) => JSON.stringify(obj, null, "\t");
 export const objToStrPlain = (obj: O = OBJ) => JSON.stringify(obj);
@@ -26,25 +18,16 @@ export const mapKey = (obj: O = OBJ) =>
   }));
 
 export const EXAMPLES = Constants.mapExamples([
-  { desc: "objK", func: objK, result: objK(OBJECT) },
-  { desc: "objV", func: objV, result: objV(OBJECT) },
-  { desc: "objE", func: objE, result: objE(OBJECT) },
-  { desc: "objF", func: objF, result: objF(OBJECT) },
-  { desc: "objInspect", func: objInspect, result: objInspect(OBJECT) },
-  { desc: "objToStr", func: objToStr, result: objToStr(OBJECT) },
-  { desc: "objToStrPlain", func: objToStrPlain, result: objToStrPlain(OBJECT) },
-  { desc: "mapKey", func: mapKey, result: mapKey(OBJECT) },
+  { desc: "objInspect", func: objInspect, result: objInspect(OBJ) },
+  { desc: "objToStr", func: objToStr, result: objToStr(OBJ) },
+  { desc: "objToStrPlain", func: objToStrPlain, result: objToStrPlain(OBJ) },
+  { desc: "mapKey", func: mapKey, result: mapKey(OBJ) },
 ]);
 
 export class ObjectHelpers {
   static SOURCE = SOURCE;
   static EXAMPLES = EXAMPLES;
-  static TEST_VALUES = { SOURCE, ARR, STR, OBJ };
 
-  static objK = objK;
-  static objV = objV;
-  static objE = objE;
-  static objF = objF;
   static objInspect = objInspect;
   static objToStr = objToStr;
   static objToStrPlain = objToStrPlain;

@@ -1,79 +1,24 @@
-import { A, N, O, S } from "../global";
-import { Constants } from "../src/constants";
-import { TypeHelpers } from "./typeHelpers";
+import { inspect } from "util";
+import { N, O, S, A } from "../global";
+import { Constants } from "./constants";
+
+const { OBJ, ARR, STR } = Constants;
 
 export const SOURCE = Constants.getSource(__filename);
-SOURCE.name = `StringHelpers`;
-
-const { len } = TypeHelpers;
-const { RegExp, Paths, Numbers, ValueTypes } = Constants;
-export const {
-  ALL,
-  LINE,
-  CHARS_ONLY,
-  NUMBERS_ONLY,
-  CHARS_AND_NUMBERS,
-  NOT_CHARS_AND_NUMBERS,
-} = RegExp;
-export const {
-  DIR_ROOT,
-  FILE,
-  DIR,
-  DIR_CURRENT,
-  DIR_PREV,
-  DIRNAME_SRC,
-  DIRNAME_TESTS,
-  DIRNAME_LOGS,
-  PATHS_ROOT,
-  PATHS_CURRENT,
-  PATHS_SRC,
-  PATHS_TESTS,
-} = Paths;
-export const {
-  MIN,
-  MAX,
-  MAX_VALUE,
-  MIN_VALUE,
-  MAX_SAFE_VALUE,
-  MIN_SAFE_VALUE,
-  _RANDOM,
-  RANDOM_BOOLEAN,
-  RANDOM_MULT,
-  RANDOM_SIZE,
-  RANDOM_INT,
-  RANGE_RANDOM,
-  RANGE_VALUES,
-  RANGE_SAFE,
-  NUMS,
-} = Numbers;
-export const {
-  UNDEFINED,
-  NULL,
-  BOOLEAN,
-  STRING,
-  NUMBER,
-  ARRAY,
-  OBJECT,
-  FUNCTION,
-  PRIMITIVES,
-} = ValueTypes;
-const STR = SOURCE.name;
-const TYPE = typeof STR;
-const OBJ = { ...SOURCE, index: 0, value: STR };
-const ARR = Array(RANDOM_SIZE)
-  .fill(MAX)
-  .map((v) => ~~(v * _RANDOM));
+SOURCE.name = `StrHelpers`;
 
 export const toDateNow = () => Date.now();
 export const toDateStamp = () => new Date(Date.now()).toUTCString();
 export const toDateISO = () => new Date(Date.now()).toISOString();
 export const toType = (v: any = STR) => typeof v;
 export const isTypeStr = (v: any = STR) => toType(v) === "string";
-export const isTypeNum = (v: any = NUMBER) => toType(v) === "number";
-export const isTypeFunc = (v: any = FUNCTION) => toType(v) === "function";
-export const isTypeObj = (v: any = OBJECT) => toType(v) === "object";
-export const isTypeNull = (v: any = NULL) => v === null;
-export const isTypeUnd = (v: any = UNDEFINED) => !v && v === undefined;
+export const isTypeNum = (v: any = Constants.NUMBER) => toType(v) === "number";
+export const isTypeFunc = (v: any = Constants.FUNCTION) =>
+  toType(v) === "function";
+export const isTypeObj = (v: any = Constants.OBJECT) => toType(v) === "object";
+export const isTypeNull = (v: any = Constants.NULL) => v === null;
+export const isTypeUnd = (v: any = Constants.UNDEFINED) =>
+  !v && v === undefined;
 export const toKey = (v: any = STR) =>
   toCharsLatin(`_${toDateNow()}_${toType(v)}`);
 export const toLines = (v: S = STR) => v.split("\n");
@@ -175,6 +120,7 @@ export const EXAMPLES = Constants.mapExamples([
 export class StringHelpers {
   static SOURCE = SOURCE;
   static EXAMPLES = EXAMPLES;
+
   static TEST_VALUES = { SOURCE, ARR, STR, OBJ };
 
   static toDateNow = toDateNow;

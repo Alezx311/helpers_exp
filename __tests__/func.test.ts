@@ -1,9 +1,10 @@
-import { Constants } from "../src/constants";
+import { Constants, objK } from "../src/constants";
 import * as funcList from "../src/func";
 import { A, N, O, S, F, B } from "../global";
 
 const SOURCE = Constants.getSource(__filename);
 SOURCE.name = __filename;
+
 const MAIN: any = funcList;
 const DESC = "funcList";
 
@@ -18,11 +19,7 @@ const tryFunc = (func: any) => {
   }
 };
 
-const KEYS = [
-  ...Constants.objK({
-    ...funcList,
-  }).filter(String),
-] as any[];
+const KEYS = [...objK({ ...funcList })].filter(String) as any[];
 // console.info(`KEYS Size: ${KEYS.length}`);
 // console.table(KEYS);
 

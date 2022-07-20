@@ -1,42 +1,40 @@
-import { addTwoNumbers } from "./addTwoNumbers";
-import { findMedianSortedArrays } from "./findMedianSortedArrays";
-import { lengthOfLongestSubstring } from "./lengthOfLongestSubstring";
-import { longestPalindrome } from "./longestPalindrome";
-import { reverseNumber } from "./reverseNumber";
-import { ArrayHelpers } from "./arrayHelpers";
 import { Constants } from "./constants";
-import { TypeHelpers } from "./typeHelpers";
+import { ArrayHelpers } from "./arrayHelpers";
+import { FsHelpers } from "./fsHelpers";
+import * as FuncHelpers from "./func";
 import { LogHelpers } from "./logHelpers";
+import { NumHelpers } from "./numHelpers";
 import { ObjectHelpers } from "./objHelpers";
+import { PathHelpers } from "./pathHelpers";
 import { StringHelpers } from "./stringHelpers";
+import { TypeHelpers } from "./typeHelpers";
 
 export const SOURCE = Constants.getSource(__filename);
-SOURCE.name = `LeetCode`;
+SOURCE.name = `HelpersMain`;
 
 export const EXAMPLES = Constants.mapExamples([
   ...ArrayHelpers.EXAMPLES,
-  ...Constants.EXAMPLES,
-  ...TypeHelpers.EXAMPLES,
+  ...FsHelpers.EXAMPLES,
   ...LogHelpers.EXAMPLES,
+  ...NumHelpers.EXAMPLES,
   ...ObjectHelpers.EXAMPLES,
+  ...PathHelpers.EXAMPLES,
   ...StringHelpers.EXAMPLES,
+  ...TypeHelpers.EXAMPLES,
 ]);
 
-export class LeetCode {
+export class Helpers {
   static SOURCE = SOURCE;
   static EXAMPLES = EXAMPLES;
-
-  static addTwoNumbers = addTwoNumbers;
-  static findMedianSortedArrays = findMedianSortedArrays;
-  static lengthOfLongestSubstring = lengthOfLongestSubstring;
-  static longestPalindrome = longestPalindrome;
-  static reverseNumber = reverseNumber;
-
   static Constants = Constants;
 
   static ArrayHelpers = ArrayHelpers;
-  static TypeHelpers = TypeHelpers;
+  static FsHelpers = FsHelpers;
   static LogHelpers = LogHelpers;
+  static NumHelpers = NumHelpers;
   static ObjectHelpers = ObjectHelpers;
+  static PathHelpers = PathHelpers;
   static StringHelpers = StringHelpers;
+  static TypeHelpers = TypeHelpers;
+  static funcHelpers = FuncHelpers;
 }

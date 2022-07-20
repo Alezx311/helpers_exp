@@ -1,8 +1,8 @@
-import { LeetCode } from "../src/index";
+import { Helpers } from "../src/index";
 
-const SOURCE = LeetCode.Constants.SOURCE;
-const DESC = LeetCode.Constants.SOURCE.name;
-const MAIN = LeetCode.Constants;
+const SOURCE = Helpers.Constants.SOURCE;
+const DESC = Helpers.Constants.SOURCE.name;
+const MAIN = Helpers.Constants;
 
 describe(DESC, () => {
   it("should be defined", () => {

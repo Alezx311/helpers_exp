@@ -1,29 +1,30 @@
 import path from "path";
-import { A, S } from "../global";
+import { S } from "../global";
+import { Constants } from "./constants";
 
-export const ROOT = process.cwd();
-export const DIR = __dirname;
-export const FILE = __filename;
-export const PATH_CURRENT = path.resolve(FILE);
-export const PATH_SRC = path.resolve(ROOT, "src");
-export const PATH_TESTS = path.resolve(ROOT, "__tests__");
-export const PATH_LOGS = path.resolve(ROOT, ".logs");
+const { ROOT, FILE } = Constants;
+
+export const SOURCE = Constants.getSource(__filename);
+SOURCE.name = "PathHelpers";
 
 export const getRoot = () => process.cwd();
 export const getDir = () => __filename;
 export const getFile = () => __dirname;
-export const getPathResolved = (...s: A<S>) => path.resolve(ROOT, ...s);
-export const getPathJoin = (...s: A<S>) => path.join(ROOT, ...s);
-export const getPathRelative = (s: S) => path.relative(ROOT, "./");
+export const getPathResolved = (...s: S[]) => path.resolve(ROOT, ...s);
+export const getPathJoin = (s1: S = ROOT, s2: S = FILE) => path.join(s1, s2);
+export const getPathRelative = (s: S = FILE) => path.relative(ROOT, s);
 
-export class Paths {
-  static ROOT = ROOT;
-  static DIR = DIR;
-  static FILE = FILE;
-  static PATH_CURRENT = PATH_CURRENT;
-  static PATH_SRC = PATH_SRC;
-  static PATH_TESTS = PATH_TESTS;
-  static PATH_LOGS = PATH_LOGS;
+export const EXAMPLES = Constants.mapExamples([
+  { desc: "getRoot", func: getRoot, result: getRoot },
+  { desc: "getDir", func: getDir, result: getDir },
+  { desc: "getFile", func: getFile, result: getFile },
+  { desc: "getPathResolved", func: getPathResolved, result: getPathResolved },
+  { desc: "getPathJoin", func: getPathJoin, result: getPathJoin },
+  { desc: "getPathRelative", func: getPathRelative, result: getPathRelative },
+]);
+export class PathHelpers {
+  static SOURCE = SOURCE;
+  static EXAMPLES = EXAMPLES;
 
   static getRoot = getRoot;
   static getDir = getDir;

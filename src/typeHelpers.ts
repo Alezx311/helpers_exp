@@ -1,16 +1,10 @@
-import { Constants } from "./constants";
+import { Constants, objE, objK, objV } from "./constants";
 import { A, N, O, S, F, B } from "../global";
 import { inspect } from "util";
-import { UNDEFINED } from "./arrayHelpers";
 
 const SOURCE = Constants.getSource(__filename);
 SOURCE.name = `TypeHelpers`;
-
-const { objK, objV, objE } = Constants;
-const STR = SOURCE.name;
-const TYPE = typeof STR;
-const OBJ = { ...SOURCE, index: 0, value: STR };
-const ARR = objK(OBJ);
+const { STR, ARR, OBJ } = Constants;
 
 export const toType = (value: any = STR) => typeof value;
 export const toTypeEqual = (v1: any = STR, v2: any = v1) =>
@@ -36,15 +30,14 @@ export const isLen = (value: A | S = STR) => len(value) > 0;
 export const isExists = (value: any = STR) => !isNull(value) && !isUnd(value);
 export const isStr = (value: any = STR) =>
   toType(value) === "string" && isLen(value);
-export const isNum = (value: any = Constants.ValueTypes.NUMBER) =>
+export const isNum = (value: any = Constants.NUMBER) =>
   toType(value) === "number" || toType(value) === "bigint";
 export const isObj = (value: any = OBJ) =>
   toType(value) === "object" && isLen(objK(value));
 export const isArr = (value: any = ARR) =>
   toType(value) === "object" && Array.isArray(value) && isLen(value);
-export const isNull = (value: any = Constants.ValueTypes.NULL) =>
-  value === null;
-export const isUnd = (value: any = Constants.ValueTypes.UNDEFINED) =>
+export const isNull = (value: any = Constants.NULL) => value === null;
+export const isUnd = (value: any = Constants.UNDEFINED) =>
   toType(value) === "undefined" || value === undefined;
 export const isFunc = (value: any = STR) =>
   toType(value) === "function" || value instanceof Function;
@@ -56,7 +49,7 @@ export const toInspectAll = (value: any = STR): S =>
 export const toJsonPlain = (value: any = STR): S => JSON.stringify(value);
 export const toJson = (value: any = STR): S =>
   JSON.stringify(value, null, "\t");
-export const toDesc = (value: any = STR, desc: S = TYPE) =>
+export const toDesc = (value: any = STR, desc: S = Constants.TYPE) =>
   `${desc ?? toType(value)}: ${value}`;
 export const toDescKey = (key: S = OBJ.key) => `Key: ${key}`;
 export const toDescIndex = (index: N = OBJ.index) => `Index: ${index}`;
@@ -108,7 +101,7 @@ export const filterByObj = (arr: A = ARR) => arr.filter(isObj);
 export const filterByValid = (arr: A = ARR) => arr.filter(Boolean);
 export const filterByStrings = (arr: A = ARR) => arr.filter(String);
 export const filterByNumber = (arr: A = ARR) => arr.filter(Number);
-export const filterByType = (arr: A = ARR, type: S = TYPE) =>
+export const filterByType = (arr: A = ARR, type: S = Constants.TYPE) =>
   arr.filter((value) => toType(value) !== type);
 export const reduceTypes = (arr: A = ARR) =>
   arr.reduce((a, value) => [...a, toType(value)], []);
