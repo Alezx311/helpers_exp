@@ -1,83 +1,41 @@
-import { Constants } from "../src/constants";
+import { LeetCode } from "../src/index";
 
-describe(`Constants`, () => {
-  it(`Constants should be defined`, () => {
-    expect(Constants).toBeDefined();
+const SOURCE = LeetCode.Constants.SOURCE;
+const DESC = LeetCode.Constants.SOURCE.name;
+const MAIN = LeetCode.Constants;
+
+describe(DESC, () => {
+  it("should be defined", () => {
+    expect(MAIN).toBeDefined();
+    expect(DESC).toBeDefined();
+    expect(MAIN.EXAMPLES).toBeDefined();
   });
 
-  it("SOURCE", () => {
-    expect(Constants.getPerformance).toBeDefined();
+  it(SOURCE.filename, () => {
+    expect(SOURCE).toBeDefined();
+    expect(SOURCE.filename).toBeDefined();
+    expect(SOURCE.date).toBeDefined();
+    expect(SOURCE.datestamp).toBeDefined();
+    expect(SOURCE.dirname).toBeDefined();
+    expect(SOURCE.desc).toBeDefined();
+    expect(SOURCE.key).toBeDefined();
+    expect(SOURCE.name).toBeDefined();
   });
 
-  it("SOURCE", () => {
-    expect(Constants.getSource).toBeDefined();
-  });
+  MAIN.EXAMPLES.map(({ desc, values, index, result }: any) => {
+    it(desc, () => {
+      const valid = desc && result;
 
-  it("SOURCE", () => {
-    expect(Constants.getStats).toBeDefined();
-  });
+      expect(desc).toBeDefined();
+      expect(values).toBeDefined();
+      expect(index).toBeDefined();
+      expect(result).toBeDefined();
 
-  it("SOURCE", () => {
-    expect(Constants.SOURCE).toBeDefined();
-  });
-
-  it("NAME", () => {
-    expect(Constants.NAME).toBeDefined();
-  });
-
-  it("FILENAME", () => {
-    expect(Constants.FILENAME).toBeDefined();
-  });
-
-  it("DATE", () => {
-    expect(Constants.DATE).toBeDefined();
-  });
-
-  it("DATESTAMP", () => {
-    expect(Constants.DATESTAMP).toBeDefined();
-  });
-
-  it("KEY", () => {
-    expect(Constants.KEY).toBeDefined();
-  });
-
-  it("DESC", () => {
-    expect(Constants.DESC).toBeDefined();
-  });
-
-  it("UNDEFINED", () => {
-    expect(Constants.UNDEFINED).toBeDefined();
-  });
-
-  it("NULL", () => {
-    expect(Constants.NULL).toBeDefined();
-  });
-
-  it("BOOLEAN", () => {
-    expect(Constants.BOOLEAN).toBeDefined();
-  });
-
-  it("STRING", () => {
-    expect(Constants.STRING).toBeDefined();
-  });
-
-  it("NUMBER", () => {
-    expect(Constants.NUMBER).toBeDefined();
-  });
-
-  it("ARRAY", () => {
-    expect(Constants.ARRAY).toBeDefined();
-  });
-
-  it("OBJECT", () => {
-    expect(Constants.OBJECT).toBeDefined();
-  });
-
-  it("FUNCTION", () => {
-    expect(Constants.FUNCTION).toBeDefined();
-  });
-
-  it("KEYS", () => {
-    expect(Constants.KEYS).toBeDefined();
+      expect(values).not.toBeNull();
+      expect(index >= 0).not.toBeNull();
+      expect(desc).not.toBeNull();
+      expect(result).not.toBeNull();
+      expect(valid).not.toEqual(false);
+    });
   });
 });

@@ -1,38 +1,41 @@
-import { N, S } from "../global";
-import { ObjectHelpers } from "../src/objHelpers";
-import { Constants } from "../src/constants";
+import { LeetCode } from "../src/index";
 
-const DESC = `ObjectHelpers`;
-const MAIN = ObjectHelpers;
-const perf = Constants.getPerformance;
-
-const check = (result: any) => {
-  let time = perf();
-
-  expect(result).toBeDefined();
-  expect(result).toBeTruthy();
-
-  time = perf(time);
-};
+const SOURCE = LeetCode.ObjectHelpers.SOURCE;
+const DESC = LeetCode.ObjectHelpers.SOURCE.name;
+const MAIN = LeetCode.ObjectHelpers;
 
 describe(DESC, () => {
-  it(`${DESC} should be defined`, () => {
+  it("should be defined", () => {
     expect(MAIN).toBeDefined();
+    expect(DESC).toBeDefined();
+    expect(MAIN.EXAMPLES).toBeDefined();
   });
 
-  MAIN.METHODS_ALL.map(({ desc, func, value = desc }, index) => {
+  it(SOURCE.filename, () => {
+    expect(SOURCE).toBeDefined();
+    expect(SOURCE.filename).toBeDefined();
+    expect(SOURCE.date).toBeDefined();
+    expect(SOURCE.datestamp).toBeDefined();
+    expect(SOURCE.dirname).toBeDefined();
+    expect(SOURCE.desc).toBeDefined();
+    expect(SOURCE.key).toBeDefined();
+    expect(SOURCE.name).toBeDefined();
+  });
+
+  MAIN.EXAMPLES.map(({ desc, values, index, result }: any) => {
     it(desc, () => {
-      let time = perf();
+      const valid = desc && result;
 
       expect(desc).toBeDefined();
-      // expect(func).toBeDefined();
-      // expect(index).toBeDefined();
-      // expect(value).toBeDefined();
-      // expect(result).toBeDefined();
+      expect(values).toBeDefined();
+      expect(index).toBeDefined();
+      expect(result).toBeDefined();
 
-      time = perf(time);
-
-      console.info({ index, desc, time, value });
+      expect(values).not.toBeNull();
+      expect(index >= 0).not.toBeNull();
+      expect(desc).not.toBeNull();
+      expect(result).not.toBeNull();
+      expect(valid).not.toEqual(false);
     });
   });
 });

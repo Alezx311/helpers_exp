@@ -1,11 +1,14 @@
-import { A, N, S } from "../global";
+import { A, N, O, S } from "../global";
 import { Constants } from "../src/constants";
 
-const DESC = "StringHelpers";
-const SOURCE = Constants.getSource(DESC);
-const FILENAME = Constants.FILENAME;
-const UND = Constants.UNDEFINED;
-const value = FILENAME;
+export const SOURCE = Constants.getSource(__filename);
+SOURCE.name = `StringHelpers`;
+
+export const { STRING, UNDEFINED, FUNCTION, NULL, OBJECT, ARRAY, DESC } =
+  Constants;
+export const STR = `${STRING}`;
+export const OBJ = { ...OBJECT };
+export const ARR = [...ARRAY];
 
 /**
  * It returns the current time in milliseconds, or the difference between the current time and the time
@@ -34,51 +37,50 @@ export const toDateISO = (v: any = null) => new Date(Date.now()).toISOString();
  * It returns the type of the value passed to it
  * @param {any} v - any - the value to be checked
  */
-export const toType = (v: any = value) => typeof v;
+export const toType = (v: any) => typeof v;
 
 /**
  * If the type of the value is a string, return true, otherwise return false.
  * @param {any} v - any - the value to check
  */
-export const isTypeStr = (v: any = value) => toType(v) === "string";
+export const isTypeStr = (v: any) => toType(v) === "string";
 
 /**
  * If the type of the value is a number, return true, otherwise return false.
  * @param {any} v - any - The value to check the type of.
  */
-export const isTypeNum = (v: any = value) => toType(v) === "number";
+export const isTypeNum = (v: any) => toType(v) === "number";
 
 /**
  * If the type of the value is a function, return true, otherwise return false.
  * @param {any} v - any - the value to check
  */
-export const isTypeFunc = (v: any = value) => toType(v) === "function";
+export const isTypeFunc = (v: any) => toType(v) === "function";
 
 /**
  * If the type of the value is an object, return true, otherwise return false.
  * @param {any} v - any - the value to check
  */
-export const isTypeObj = (v: any = value) => toType(v) === "object";
+export const isTypeObj = (v: any) => toType(v) === "object";
 
 /**
  * If the type of the value is null, return true.
  * @param {any} v - any - The value to check the type of.
  */
-export const isTypeNull = (v: any = value) => v === null;
+export const isTypeNull = (v: any) => v === null;
 
 /**
  * If the type of the value is undefined, return true, otherwise return false.
  * @param {any} v - any - The value to check the type of.
  */
-export const isTypeUnd = (v: any = UND) => !v && v === undefined;
+export const isTypeUnd = (v: any = UNDEFINED) => !v && v === undefined;
 
 /**
  * "toKey" returns a string that is a combination of the current date and time, and the type of the
  * value passed to it
  * @param {any} v - any - the value to be converted to a key
  */
-export const toKey = (v: any = value) =>
-  toCharsLatin(`_${toDateNow()}_${toType(v)}`);
+export const toKey = (v: any) => toCharsLatin(`_${toDateNow()}_${toType(v)}`);
 
 /**
  * "Given a string, return an array of strings, each of which is a line from the original string."
@@ -214,25 +216,6 @@ export const toStats = (value: S) => ({ value, key: toKey(value) });
 export const toObj = (...args: A) => ({ size: toLen(args), values: args });
 
 /**
- * It takes a string and returns an object with all the string functions applied to it
- * @param value - The value to be tested.
- * @returns An object with all the results of the functions.
- */
-export const toExamples = (value: any) => {
-  const results = {
-    value,
-    ...StringHelpers.METHODS_ALL.map(({ desc, func }, index) => {
-      const startTime = perf();
-      const result = func(value);
-      const time = perf(startTime);
-      return { desc, func, time, result, index };
-    }),
-  };
-
-  return results;
-};
-
-/**
  * SubStr takes a string, a start index, and an end index, and returns a substring of the string from
  * the start index to the end index.
  * @param {S} str - The string to be sliced.
@@ -316,64 +299,57 @@ export const matchAllSpec = (v: S) =>
  */
 export const matchAllLines = (v: S) => `${v?.match(/^.+$/gim)}`;
 
-/* Creating an array of objects with the following properties:
-desc: string
-func: function
-index: number
-value: any
-example: any */
-export const METHODS_ALL: { desc: S; func: any; value: any; index: N }[] = [
-  { desc: "perf", func: perf, value },
-  { desc: "toDateNow", value: UND, func: toDateNow },
-  { desc: "toDateStamp", value: UND, func: toDateStamp },
-  { desc: "toDateISO", value: UND, func: toDateISO },
-  { desc: "toType", value, func: toType },
-  { desc: "isTypeStr", value, func: isTypeStr },
-  { desc: "isTypeNum", value: 42, func: isTypeNum },
-  { desc: "isTypeFunc", value: Constants.FUNCTION, func: isTypeFunc },
-  { desc: "isTypeObj", value: Constants.OBJECT, func: isTypeObj },
-  { desc: "isTypeNull", value: null, func: isTypeNull },
-  { desc: "isTypeUnd", value: UND, func: isTypeUnd },
-  { desc: "toKey", func: toKey, value },
-  { desc: "toLines", func: toLines, value },
-  { desc: "toTabs", func: toTabs, value },
-  { desc: "toWords", func: toWords, value },
-  { desc: "toCharsLatin", func: toCharsLatin, value },
-  { desc: "toCharsValid", func: toCharsValid, value },
-  { desc: "toCharsArray", func: toCharsArray, value },
-  { desc: "toUnical", func: toUnical, value },
-  { desc: "toReversed", func: toReversed, value },
-  { desc: "toLen", func: toLen, value },
-  { desc: "toTrimmed", func: toTrimmed, value },
-  { desc: "toObjStr", func: toObjStr, value },
-  { desc: "toLongest", func: toLongest, value },
-  { desc: "isValidStr", func: isValidStr, value },
-  { desc: "isValidLength", func: isValidLength, value },
-  { desc: "isPalindrome", func: isPalindrome, value: "ababa" },
-  { desc: "isIncludeChars", func: isIncludeChars, value },
-  { desc: "isTrimmed", func: isTrimmed, value },
-  { desc: "toStats", func: toStats, value },
-  { desc: "toObj", func: toObj, value },
-  { desc: "subStr", func: subStr, value },
-  { desc: "toSubParts", func: toSubParts, value },
-  { desc: "strStat", func: strStat, value },
-  { desc: "matchAll", func: matchAll, value },
-  { desc: "matchAllLatin", func: matchAllLatin, value },
-  { desc: "matchAllKyr", func: matchAllKyr, value },
-  { desc: "matchAllInt", func: matchAllInt, value },
-  { desc: "matchAllSpec", func: matchAllSpec, value },
-  { desc: "matchAllLines", func: matchAllLines, value },
-].map(({ desc, func, value }, index) => ({
-  desc,
-  func,
-  index,
-  value,
-  example: func(value),
-}));
+export const EXAMPLES = Constants.mapExamples([
+  { desc: "perf", func: perf, result: perf() },
+  { desc: "toDateNow", func: toDateNow, result: toDateNow() },
+  { desc: "toDateStamp", func: toDateStamp, result: toDateStamp() },
+  { desc: "toDateISO", func: toDateISO, result: toDateISO() },
+  { desc: "toType", func: toType, result: toType(STR) },
+  { desc: "isTypeStr", func: isTypeStr, result: isTypeStr(STR) },
+  { desc: "isTypeNum", func: isTypeNum, result: isTypeNum(1) },
+  { desc: "isTypeFunc", func: isTypeFunc, result: isTypeFunc(FUNCTION) },
+  { desc: "isTypeObj", func: isTypeObj, result: isTypeObj(OBJ) },
+  { desc: "isTypeNull", func: isTypeNull, result: isTypeNull(NULL) },
+  { desc: "isTypeUnd", func: isTypeUnd, result: isTypeUnd(UNDEFINED) },
+  { desc: "toKey", func: toKey, result: toKey(STR) },
+  { desc: "toLines", func: toLines, result: toLines(STR) },
+  { desc: "toTabs", func: toTabs, result: toTabs(STR) },
+  { desc: "toWords", func: toWords, result: toWords(STR) },
+  { desc: "toCharsLatin", func: toCharsLatin, result: toCharsLatin(STR) },
+  { desc: "toCharsValid", func: toCharsValid, result: toCharsValid(STR) },
+  { desc: "toCharsArray", func: toCharsArray, result: toCharsArray(STR) },
+  { desc: "toUnical", func: toUnical, result: toUnical(STR) },
+  { desc: "toReversed", func: toReversed, result: toReversed(STR) },
+  { desc: "toLen", func: toLen, result: toLen(STR) },
+  { desc: "toTrimmed", func: toTrimmed, result: toTrimmed(STR) },
+  { desc: "toObjStr", func: toObjStr, result: toObjStr(STR) },
+  { desc: "toLongest", func: toLongest, result: toLongest(STR) },
+  { desc: "isValidStr", func: isValidStr, result: isValidStr(STR) },
+  { desc: "isValidLength", func: isValidLength, result: isValidLength(STR) },
+  {
+    desc: "isPalindrome",
+    func: isPalindrome,
+    result: isPalindrome(Constants.PALINDROME),
+  },
+  { desc: "isIncludeChars", func: isIncludeChars, result: isIncludeChars(STR) },
+  { desc: "isTrimmed", func: isTrimmed, result: isTrimmed(STR) },
+  { desc: "toStats", func: toStats, result: toStats(STR) },
+  { desc: "toObj", func: toObj, result: toObj(STR) },
+  { desc: "subStr", func: subStr, result: subStr(STR) },
+  { desc: "toSubParts", func: toSubParts, result: toSubParts(STR) },
+  { desc: "strStat", func: strStat, result: strStat(STR) },
+  { desc: "matchAll", func: matchAll, result: matchAll(STR) },
+  { desc: "matchAllLatin", func: matchAllLatin, result: matchAllLatin(STR) },
+  { desc: "matchAllKyr", func: matchAllKyr, result: matchAllKyr(STR) },
+  { desc: "matchAllInt", func: matchAllInt, result: matchAllInt(STR) },
+  { desc: "matchAllSpec", func: matchAllSpec, result: matchAllSpec(STR) },
+  { desc: "matchAllLines", func: matchAllLines, result: matchAllLines(STR) },
+]);
 
 export class StringHelpers {
-  static METHODS_ALL = METHODS_ALL;
-  static METHODS_SIZE = METHODS_ALL.length;
+  static SOURCE = SOURCE;
+  static EXAMPLES = EXAMPLES;
+  static TEST_VALUES = { SOURCE, DESC, ARR, STR, OBJ };
 
   static perf = perf;
   static toDateNow = toDateNow;
@@ -406,7 +382,6 @@ export class StringHelpers {
   static isTrimmed = isTrimmed;
   static toStats = toStats;
   static toObj = toObj;
-  static toExamples = toExamples;
   static subStr = subStr;
   static toSubParts = toSubParts;
   static strStat = strStat;

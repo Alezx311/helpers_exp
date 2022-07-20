@@ -1,47 +1,41 @@
-import { N, S } from "../global";
-import { StringHelpers } from "../src/stringHelpers";
-import { Constants } from "../src/constants";
+import { LeetCode } from "../src/index";
 
-const DESC = `StringHelpers`;
-const MAIN = StringHelpers;
-const perf = MAIN.perf;
-
-const check = (result: any) => {
-  let time = perf();
-
-  expect(result).toBeDefined();
-  expect(result).toBeTruthy();
-
-  time = perf(time);
-};
+const SOURCE = LeetCode.StringHelpers.SOURCE;
+const DESC = LeetCode.StringHelpers.SOURCE.name;
+const MAIN = LeetCode.StringHelpers;
 
 describe(DESC, () => {
-  it(`${DESC} should be defined`, () => {
+  it("should be defined", () => {
     expect(MAIN).toBeDefined();
+    expect(DESC).toBeDefined();
+    expect(MAIN.EXAMPLES).toBeDefined();
   });
 
-  // MAIN.METHODS_ALL.map(
-  //   ({ desc, func, value }: { desc: S; func: any; value: any }, index: N) => {
-  //     it(`${index}: ${desc}`, () => {
-  //       const result = func(value || desc);
-  //       check(result);
-  //     });
-  //   }
-  // );
+  it(SOURCE.filename, () => {
+    expect(SOURCE).toBeDefined();
+    expect(SOURCE.filename).toBeDefined();
+    expect(SOURCE.date).toBeDefined();
+    expect(SOURCE.datestamp).toBeDefined();
+    expect(SOURCE.dirname).toBeDefined();
+    expect(SOURCE.desc).toBeDefined();
+    expect(SOURCE.key).toBeDefined();
+    expect(SOURCE.name).toBeDefined();
+  });
 
-  MAIN.METHODS_ALL.map(({ desc, func, value = desc }, index) => {
+  MAIN.EXAMPLES.map(({ desc, values, index, result }: any) => {
     it(desc, () => {
-      let time = perf();
+      const valid = desc && result;
 
       expect(desc).toBeDefined();
-      // expect(func).toBeDefined();
-      // expect(index).toBeDefined();
-      // expect(value).toBeDefined();
-      // expect(result).toBeDefined();
+      expect(values).toBeDefined();
+      expect(index).toBeDefined();
+      expect(result).toBeDefined();
 
-      time = perf(time);
-
-      console.info({ index, desc, time, value });
+      expect(values).not.toBeNull();
+      expect(index >= 0).not.toBeNull();
+      expect(desc).not.toBeNull();
+      expect(result).not.toBeNull();
+      expect(valid).not.toEqual(false);
     });
   });
 });

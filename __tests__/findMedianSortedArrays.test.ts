@@ -1,9 +1,8 @@
 import { N, TestData } from "../global";
 import { LeetCode } from "../src/index";
 
-const { description, func, values }: TestData<[N[], N[]], N> = {
-  description: `Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
-The overall run time complexity should be O(log (m+n)).`,
+const { description, func, values }: any = {
+  description: `findMedianSortedArrays`,
   func: LeetCode.findMedianSortedArrays,
   values: [
     {
@@ -48,9 +47,15 @@ describe(description, () => {
     expect(func).toBeDefined();
   });
 
-  values.map(({ input, expected, desc }) => {
+  values.map(({ input, expected, desc }: any, index: number) => {
     it(desc, () => {
-      expect(func(...input)).toEqual(expected);
+      const result = func(input[0], input[1]);
+
+      expect(input[0]).toBeTruthy();
+      expect(input[1]).toBeTruthy();
+      expect(expected).toBeTruthy();
+      expect(result).toBeTruthy();
+      expect(result).toEqual(expected);
     });
   });
 });

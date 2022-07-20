@@ -1,25 +1,42 @@
-import { S, TestData } from "../global";
 import { LeetCode } from "../src/index";
 
-const { description, func, values }: TestData<S, S> = {
-  description: `Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
-The overall run time complexity should be O(log (m+n)).`,
-  func: LeetCode.findMedianSortedArrays,
-  values: Object.keys(LeetCode).map((key) => ({
-    input: typeof LeetCode[key],
-    expected: "function",
-    desc: `typeof LeetCode.${key} must be a function`,
-  })),
-};
+const SOURCE = LeetCode.SOURCE;
+const DESC = LeetCode.SOURCE.name;
+const MAIN = LeetCode;
 
-describe(description, () => {
-  it("Should be defined", () => {
-    expect(func).toBeDefined();
+describe(DESC, () => {
+  it("should be defined", () => {
+    expect(MAIN).toBeDefined();
+    expect(DESC).toBeDefined();
+    expect(MAIN.EXAMPLES).toBeDefined();
+    expect(MAIN.EXAMPLES.length).toBeGreaterThan(0);
   });
 
-  values.map(({ input, expected, desc }) => {
+  it(SOURCE.filename, () => {
+    expect(SOURCE).toBeDefined();
+    expect(SOURCE.filename).toBeDefined();
+    expect(SOURCE.date).toBeDefined();
+    expect(SOURCE.datestamp).toBeDefined();
+    expect(SOURCE.dirname).toBeDefined();
+    expect(SOURCE.desc).toBeDefined();
+    expect(SOURCE.key).toBeDefined();
+    expect(SOURCE.name).toBeDefined();
+  });
+
+  MAIN.EXAMPLES.map(({ desc, values, index, result }: any) => {
     it(desc, () => {
-      expect(input).toEqual(expected);
+      const valid = desc && result;
+
+      expect(desc).toBeDefined();
+      expect(values).toBeDefined();
+      expect(index).toBeDefined();
+      expect(result).toBeDefined();
+
+      expect(values).not.toBeNull();
+      expect(index >= 0).not.toBeNull();
+      expect(desc).not.toBeNull();
+      expect(result).not.toBeNull();
+      expect(valid).not.toEqual(false);
     });
   });
 });

@@ -1,9 +1,15 @@
 import { inspect } from "util";
-import { N, O, S } from "../global";
+import { A, N, O, S } from "../global";
 import { Constants } from "../src/constants";
 
-const { OBJECT } = Constants;
+export const SOURCE = Constants.getSource(__filename);
+SOURCE.name = `ObjectHelpers`;
 
+export const { STRING, UNDEFINED, FUNCTION, NULL, OBJECT, ARRAY, DESC } =
+  Constants;
+export const STR = `${STRING}`;
+export const OBJ = { ...OBJECT };
+export const ARR = [...ARRAY];
 /**
  * "Return an array of the keys of an object, but only if they are truthy."
  *
@@ -62,19 +68,21 @@ export const objMap = (obj: O = {}) => {
   return objKeys(obj).map((v, i) => mapKey(v, i, obj));
 };
 
-export const METHODS_ALL = [
-  { desc: "objKeys", func: objKeys, value: OBJECT },
-  { desc: "objValues", func: objValues, value: OBJECT },
-  { desc: "objEntries", func: objEntries, value: OBJECT },
-  { desc: "objInspect", func: objInspect, value: OBJECT },
-  { desc: "objStr", func: objStr, value: OBJECT },
-  { desc: "mapKey", func: mapKey, value: OBJECT },
-  { desc: "objMap", func: objMap, value: OBJECT },
-];
+export const EXAMPLES = Constants.mapExamples([
+  { desc: "objKeys", func: objKeys, result: objKeys(OBJ) },
+  { desc: "objValues", func: objValues, result: objValues(OBJ) },
+  { desc: "objEntries", func: objEntries, result: objEntries(OBJ) },
+  { desc: "objInspect", func: objInspect, result: objInspect(OBJ) },
+  { desc: "objStr", func: objStr, result: objStr(OBJ) },
+  { desc: "mapKey", func: mapKey, result: mapKey(STR, 0, OBJ) },
+  { desc: "objMap", func: objMap, result: objMap(OBJ) },
+]);
 
 export class ObjectHelpers {
-  static METHODS_ALL = METHODS_ALL;
-  static METHODS_SIZE = METHODS_ALL.length;
+  static SOURCE = SOURCE;
+  static EXAMPLES = EXAMPLES;
+  static TEST_VALUES = { SOURCE, DESC, ARR, STR, OBJ };
+
   static objKeys = objKeys;
   static objValues = objValues;
   static objEntries = objEntries;
