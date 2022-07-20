@@ -1,5 +1,4 @@
-import { inspect } from "util";
-import { N, O, S, A } from "../global";
+import { A, N, S } from "../global";
 import { Constants } from "./constants";
 
 const { OBJ, ARR, STR } = Constants;

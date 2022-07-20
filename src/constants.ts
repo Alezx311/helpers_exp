@@ -71,28 +71,28 @@ export class Constants {
   static BOOLEAN = true;
   static STRING = "String";
   static NUMBER = 42;
-  static ARRAY = [Constants.STRING, Constants.NUMBER];
-  static OBJECT = { string: Constants.STRING, number: Constants.NUMBER };
+  static ARRAY = [this.STRING, this.NUMBER];
+  static OBJECT = { string: this.STRING, number: this.NUMBER };
   static FUNCTION = function () {
     return true;
   };
 
   static STR = SOURCE.name;
-  static TYPE = typeof Constants.STR;
-  static OBJ = { ...SOURCE, index: 0, value: Constants.STR };
+  static TYPE = typeof this.STR;
+  static OBJ = { ...SOURCE, index: 0, value: this.STR };
   static ARR = Array(10)
     .fill(100)
     .map((v) => ~~(v * Math.random()));
 
   static PRIMITIVES = [
-    { desc: "UNDEFINED", value: Constants.UNDEFINED },
-    { desc: "NULL", value: Constants.NULL },
-    { desc: "BOOLEAN", value: Constants.BOOLEAN },
-    { desc: "STRING", value: Constants.STRING },
-    { desc: "NUMBER", value: Constants.NUMBER },
-    { desc: "ARRAY", value: Constants.ARRAY },
-    { desc: "OBJECT", value: Constants.OBJECT },
-    { desc: "FUNCTION", value: Constants.FUNCTION },
+    { desc: "UNDEFINED", value: this.UNDEFINED },
+    { desc: "NULL", value: this.NULL },
+    { desc: "BOOLEAN", value: this.BOOLEAN },
+    { desc: "STRING", value: this.STRING },
+    { desc: "NUMBER", value: this.NUMBER },
+    { desc: "ARRAY", value: this.ARRAY },
+    { desc: "OBJECT", value: this.OBJECT },
+    { desc: "FUNCTION", value: this.FUNCTION },
   ].map(({ desc, value }, index) => ({
     desc,
     value,
@@ -105,10 +105,10 @@ export class Constants {
   static ROOT = process.cwd();
   static DIR = __dirname;
   static FILE = __filename;
-  static PATH_CURRENT = path.resolve(Constants.FILE);
-  static PATH_SRC = path.resolve(Constants.ROOT, "src");
-  static PATH_TESTS = path.resolve(Constants.ROOT, "__tests__");
-  static PATH_LOGS = path.resolve(Constants.ROOT, ".logs");
+  static PATH_CURRENT = path.resolve(this.FILE);
+  static PATH_SRC = path.resolve(this.ROOT, "src");
+  static PATH_TESTS = path.resolve(this.ROOT, "__tests__");
+  static PATH_LOGS = path.resolve(this.ROOT, ".logs");
 
   static MIN = 1;
   static MAX = 1000;
@@ -117,13 +117,13 @@ export class Constants {
   static MAX_SAFE_VALUE = Number.MAX_SAFE_INTEGER;
   static MIN_SAFE_VALUE = Number.MIN_SAFE_INTEGER;
   static RANDOM = Math.random();
-  static RANDOM_BOOLEAN = Constants.RANDOM > 0.5;
-  static RANDOM_MULT = ~~(Constants.RANDOM * 1000);
+  static RANDOM_BOOLEAN = this.RANDOM > 0.5;
+  static RANDOM_MULT = ~~(this.RANDOM * 1000);
   static RANDOM_SIZE = 10;
-  static RANGE_RANDOM = [Constants.MIN, Constants.RANDOM, Constants.MAX];
-  static RANGE_VALUES = [Constants.MIN_VALUE, Constants.MAX_VALUE];
-  static RANGE_SAFE = [Constants.MIN_SAFE_VALUE, Constants.MAX_SAFE_VALUE];
-  static NUMS = [...Constants.RANGE_RANDOM];
+  static RANGE_RANDOM = [this.MIN, this.RANDOM, this.MAX];
+  static RANGE_VALUES = [this.MIN_VALUE, this.MAX_VALUE];
+  static RANGE_SAFE = [this.MIN_SAFE_VALUE, this.MAX_SAFE_VALUE];
+  static NUMS = [...this.RANGE_RANDOM];
 
   static ALL = new RegExp(/.+/gim);
   static LINE = new RegExp(/^.+$/gim);
@@ -132,197 +132,252 @@ export class Constants {
   static CHARS_AND_NUMBERS = new RegExp(/[a-z0-9]/gim);
   static NOT_CHARS_AND_NUMBERS = new RegExp(/[^a-z0-9]/gim);
 
+  static KEYS = [
+    { desc: "NAME", result: this.NAME },
+    { desc: "FILENAME", result: this.FILENAME },
+    { desc: "DATE", result: this.DATE },
+    { desc: "DATESTAMP", result: this.DATESTAMP },
+    { desc: "KEY", result: this.KEY },
+    { desc: "DESC", result: this.DESC },
+    { desc: "UNDEFINED", result: this.UNDEFINED },
+    { desc: "NULL", result: this.NULL },
+    { desc: "BOOLEAN", result: this.BOOLEAN },
+    { desc: "STRING", result: this.STRING },
+    { desc: "NUMBER", result: this.NUMBER },
+    { desc: "ARRAY", result: this.ARRAY },
+    { desc: "OBJECT", result: this.OBJECT },
+    { desc: "FUNCTION", result: this.FUNCTION },
+    { desc: "STR", result: this.STR },
+    { desc: "TYPE", result: this.TYPE },
+    { desc: "OBJ", result: this.OBJ },
+    { desc: "ARR", result: this.ARR },
+    { desc: "PRIMITIVES", result: this.PRIMITIVES },
+    { desc: "PALINDROME", result: this.PALINDROME },
+    { desc: "ROOT", result: this.ROOT },
+    { desc: "DIR", result: this.DIR },
+    { desc: "FILE", result: this.FILE },
+    { desc: "PATH_CURRENT", result: this.PATH_CURRENT },
+    { desc: "PATH_SRC", result: this.PATH_SRC },
+    { desc: "PATH_TESTS", result: this.PATH_TESTS },
+    { desc: "PATH_LOGS", result: this.PATH_LOGS },
+    { desc: "MIN", result: this.MIN },
+    { desc: "MAX", result: this.MAX },
+    { desc: "MAX_VALUE", result: this.MAX_VALUE },
+    { desc: "MIN_VALUE", result: this.MIN_VALUE },
+    { desc: "MAX_SAFE_VALUE", result: this.MAX_SAFE_VALUE },
+    { desc: "MIN_SAFE_VALUE", result: this.MIN_SAFE_VALUE },
+    { desc: "RANDOM", result: this.RANDOM },
+    { desc: "RANDOM_BOOLEAN", result: this.RANDOM_BOOLEAN },
+    { desc: "RANDOM_MULT", result: this.RANDOM_MULT },
+    { desc: "RANDOM_SIZE", result: this.RANDOM_SIZE },
+    { desc: "RANGE_RANDOM", result: this.RANGE_RANDOM },
+    { desc: "RANGE_VALUES", result: this.RANGE_VALUES },
+    { desc: "RANGE_SAFE", result: this.RANGE_SAFE },
+    { desc: "NUMS", result: this.NUMS },
+    { desc: "ALL", result: this.ALL },
+    { desc: "LINE", result: this.LINE },
+    { desc: "CHARS_ONLY", result: this.CHARS_ONLY },
+    { desc: "NUMBERS_ONLY", result: this.NUMBERS_ONLY },
+    { desc: "CHARS_AND_NUMBERS", result: this.CHARS_AND_NUMBERS },
+    { desc: "NOT_CHARS_AND_NUMBERS", result: this.NOT_CHARS_AND_NUMBERS },
+  ].map((desc: any, result: any) => {
+    const func: () => any = function () {
+      return result;
+    };
+    return { desc, result, func };
+  });
+
   static get _RANDOM() {
-    return ~~(Math.random() * (Constants.MAX - Constants.MIN) + Constants.MIN);
+    return ~~(Math.random() * (this.MAX - this.MIN) + this.MIN);
   }
 
   static EXAMPLES = mapExamples([
     {
       desc: "getSource",
-      func: () => Constants.getSource,
-      result: Constants.getSource,
+      func: () => this.getSource,
+      result: this.getSource,
     },
     {
       desc: "getStats",
-      func: () => Constants.getStats,
-      result: Constants.getStats,
+      func: () => this.getStats,
+      result: this.getStats,
     },
     {
       desc: "getPerformance",
-      func: () => Constants.getPerformance,
-      result: Constants.getPerformance,
+      func: () => this.getPerformance,
+      result: this.getPerformance,
     },
-    { desc: "objK", func: () => Constants.objK, result: Constants.objK },
-    { desc: "objV", func: () => Constants.objV, result: Constants.objV },
-    { desc: "objE", func: () => Constants.objE, result: Constants.objE },
-    { desc: "objF", func: () => Constants.objF, result: Constants.objF },
+    { desc: "objK", func: () => this.objK, result: this.objK },
+    { desc: "objV", func: () => this.objV, result: this.objV },
+    { desc: "objE", func: () => this.objE, result: this.objE },
+    { desc: "objF", func: () => this.objF, result: this.objF },
     {
       desc: "UNDEFINED",
-      func: () => Constants.UNDEFINED,
-      result: Constants.UNDEFINED,
+      func: () => this.UNDEFINED,
+      result: this.UNDEFINED,
     },
-    { desc: "NULL", func: () => Constants.NULL, result: Constants.NULL },
+    { desc: "NULL", func: () => this.NULL, result: this.NULL },
     {
       desc: "BOOLEAN",
-      func: () => Constants.BOOLEAN,
-      result: Constants.BOOLEAN,
+      func: () => this.BOOLEAN,
+      result: this.BOOLEAN,
     },
-    { desc: "STRING", func: () => Constants.STRING, result: Constants.STRING },
-    { desc: "NUMBER", func: () => Constants.NUMBER, result: Constants.NUMBER },
-    { desc: "ARRAY", func: () => Constants.ARRAY, result: Constants.ARRAY },
-    { desc: "OBJECT", func: () => Constants.OBJECT, result: Constants.OBJECT },
+    { desc: "STRING", func: () => this.STRING, result: this.STRING },
+    { desc: "NUMBER", func: () => this.NUMBER, result: this.NUMBER },
+    { desc: "ARRAY", func: () => this.ARRAY, result: this.ARRAY },
+    { desc: "OBJECT", func: () => this.OBJECT, result: this.OBJECT },
     {
       desc: "FUNCTION",
-      func: () => Constants.FUNCTION,
-      result: Constants.FUNCTION,
+      func: () => this.FUNCTION,
+      result: this.FUNCTION,
     },
 
-    { desc: "NAME", func: () => Constants.NAME, result: Constants.NAME },
+    { desc: "NAME", func: () => this.NAME, result: this.NAME },
     {
       desc: "FILENAME",
-      func: () => Constants.FILENAME,
-      result: Constants.FILENAME,
+      func: () => this.FILENAME,
+      result: this.FILENAME,
     },
-    { desc: "DATE", func: () => Constants.DATE, result: Constants.DATE },
+    { desc: "DATE", func: () => this.DATE, result: this.DATE },
     {
       desc: "DATESTAMP",
-      func: () => Constants.DATESTAMP,
-      result: Constants.DATESTAMP,
+      func: () => this.DATESTAMP,
+      result: this.DATESTAMP,
     },
-    { desc: "KEY", func: () => Constants.KEY, result: Constants.KEY },
-    { desc: "DESC", func: () => Constants.DESC, result: Constants.DESC },
+    { desc: "KEY", func: () => this.KEY, result: this.KEY },
+    { desc: "DESC", func: () => this.DESC, result: this.DESC },
     {
       desc: "UNDEFINED",
-      func: () => Constants.UNDEFINED,
-      result: Constants.UNDEFINED,
+      func: () => this.UNDEFINED,
+      result: this.UNDEFINED,
     },
-    { desc: "NULL", func: () => Constants.NULL, result: Constants.NULL },
+    { desc: "NULL", func: () => this.NULL, result: this.NULL },
     {
       desc: "BOOLEAN",
-      func: () => Constants.BOOLEAN,
-      result: Constants.BOOLEAN,
+      func: () => this.BOOLEAN,
+      result: this.BOOLEAN,
     },
-    { desc: "STRING", func: () => Constants.STRING, result: Constants.STRING },
-    { desc: "NUMBER", func: () => Constants.NUMBER, result: Constants.NUMBER },
-    { desc: "ARRAY", func: () => Constants.ARRAY, result: Constants.ARRAY },
-    { desc: "OBJECT", func: () => Constants.OBJECT, result: Constants.OBJECT },
+    { desc: "STRING", func: () => this.STRING, result: this.STRING },
+    { desc: "NUMBER", func: () => this.NUMBER, result: this.NUMBER },
+    { desc: "ARRAY", func: () => this.ARRAY, result: this.ARRAY },
+    { desc: "OBJECT", func: () => this.OBJECT, result: this.OBJECT },
     {
       desc: "FUNCTION",
-      func: () => Constants.FUNCTION,
-      result: Constants.FUNCTION,
+      func: () => this.FUNCTION,
+      result: this.FUNCTION,
     },
-    { desc: "STR", func: () => Constants.STR, result: Constants.STR },
-    { desc: "TYPE", func: () => Constants.TYPE, result: Constants.TYPE },
-    { desc: "OBJ", func: () => Constants.OBJ, result: Constants.OBJ },
-    { desc: "ARR", func: () => Constants.ARR, result: Constants.ARR },
+    { desc: "STR", func: () => this.STR, result: this.STR },
+    { desc: "TYPE", func: () => this.TYPE, result: this.TYPE },
+    { desc: "OBJ", func: () => this.OBJ, result: this.OBJ },
+    { desc: "ARR", func: () => this.ARR, result: this.ARR },
     {
       desc: "PRIMITIVES",
-      func: () => Constants.PRIMITIVES,
-      result: Constants.PRIMITIVES,
+      func: () => this.PRIMITIVES,
+      result: this.PRIMITIVES,
     },
     {
       desc: "PALINDROME",
-      func: () => Constants.PALINDROME,
-      result: Constants.PALINDROME,
+      func: () => this.PALINDROME,
+      result: this.PALINDROME,
     },
-    { desc: "ROOT", func: () => Constants.ROOT, result: Constants.ROOT },
-    { desc: "DIR", func: () => Constants.DIR, result: Constants.DIR },
-    { desc: "FILE", func: () => Constants.FILE, result: Constants.FILE },
+    { desc: "ROOT", func: () => this.ROOT, result: this.ROOT },
+    { desc: "DIR", func: () => this.DIR, result: this.DIR },
+    { desc: "FILE", func: () => this.FILE, result: this.FILE },
     {
       desc: "PATH_CURRENT",
-      func: () => Constants.PATH_CURRENT,
-      result: Constants.PATH_CURRENT,
+      func: () => this.PATH_CURRENT,
+      result: this.PATH_CURRENT,
     },
     {
       desc: "PATH_SRC",
-      func: () => Constants.PATH_SRC,
-      result: Constants.PATH_SRC,
+      func: () => this.PATH_SRC,
+      result: this.PATH_SRC,
     },
     {
       desc: "PATH_TESTS",
-      func: () => Constants.PATH_TESTS,
-      result: Constants.PATH_TESTS,
+      func: () => this.PATH_TESTS,
+      result: this.PATH_TESTS,
     },
     {
       desc: "PATH_LOGS",
-      func: () => Constants.PATH_LOGS,
-      result: Constants.PATH_LOGS,
+      func: () => this.PATH_LOGS,
+      result: this.PATH_LOGS,
     },
-    { desc: "MIN", func: () => Constants.MIN, result: Constants.MIN },
-    { desc: "MAX", func: () => Constants.MAX, result: Constants.MAX },
+    { desc: "MIN", func: () => this.MIN, result: this.MIN },
+    { desc: "MAX", func: () => this.MAX, result: this.MAX },
     {
       desc: "MAX_VALUE",
-      func: () => Constants.MAX_VALUE,
-      result: Constants.MAX_VALUE,
+      func: () => this.MAX_VALUE,
+      result: this.MAX_VALUE,
     },
     {
       desc: "MIN_VALUE",
-      func: () => Constants.MIN_VALUE,
-      result: Constants.MIN_VALUE,
+      func: () => this.MIN_VALUE,
+      result: this.MIN_VALUE,
     },
     {
       desc: "MAX_SAFE_VALUE",
-      func: () => Constants.MAX_SAFE_VALUE,
-      result: Constants.MAX_SAFE_VALUE,
+      func: () => this.MAX_SAFE_VALUE,
+      result: this.MAX_SAFE_VALUE,
     },
     {
       desc: "MIN_SAFE_VALUE",
-      func: () => Constants.MIN_SAFE_VALUE,
-      result: Constants.MIN_SAFE_VALUE,
+      func: () => this.MIN_SAFE_VALUE,
+      result: this.MIN_SAFE_VALUE,
     },
-    { desc: "RANDOM", func: () => Constants.RANDOM, result: Constants.RANDOM },
+    { desc: "RANDOM", func: () => this.RANDOM, result: this.RANDOM },
     {
       desc: "RANDOM_BOOLEAN",
-      func: () => Constants.RANDOM_BOOLEAN,
-      result: Constants.RANDOM_BOOLEAN,
+      func: () => this.RANDOM_BOOLEAN,
+      result: this.RANDOM_BOOLEAN,
     },
     {
       desc: "RANDOM_MULT",
-      func: () => Constants.RANDOM_MULT,
-      result: Constants.RANDOM_MULT,
+      func: () => this.RANDOM_MULT,
+      result: this.RANDOM_MULT,
     },
     {
       desc: "RANDOM_SIZE",
-      func: () => Constants.RANDOM_SIZE,
-      result: Constants.RANDOM_SIZE,
+      func: () => this.RANDOM_SIZE,
+      result: this.RANDOM_SIZE,
     },
     {
       desc: "RANGE_RANDOM",
-      func: () => Constants.RANGE_RANDOM,
-      result: Constants.RANGE_RANDOM,
+      func: () => this.RANGE_RANDOM,
+      result: this.RANGE_RANDOM,
     },
     {
       desc: "RANGE_VALUES",
-      func: () => Constants.RANGE_VALUES,
-      result: Constants.RANGE_VALUES,
+      func: () => this.RANGE_VALUES,
+      result: this.RANGE_VALUES,
     },
     {
       desc: "RANGE_SAFE",
-      func: () => Constants.RANGE_SAFE,
-      result: Constants.RANGE_SAFE,
+      func: () => this.RANGE_SAFE,
+      result: this.RANGE_SAFE,
     },
-    { desc: "NUMS", func: () => Constants.NUMS, result: Constants.NUMS },
-    { desc: "ALL", func: () => Constants.ALL, result: Constants.ALL },
-    { desc: "LINE", func: () => Constants.LINE, result: Constants.LINE },
+    { desc: "NUMS", func: () => this.NUMS, result: this.NUMS },
+    { desc: "ALL", func: () => this.ALL, result: this.ALL },
+    { desc: "LINE", func: () => this.LINE, result: this.LINE },
     {
       desc: "CHARS_ONLY",
-      func: () => Constants.CHARS_ONLY,
-      result: Constants.CHARS_ONLY,
+      func: () => this.CHARS_ONLY,
+      result: this.CHARS_ONLY,
     },
     {
       desc: "NUMBERS_ONLY",
-      func: () => Constants.NUMBERS_ONLY,
-      result: Constants.NUMBERS_ONLY,
+      func: () => this.NUMBERS_ONLY,
+      result: this.NUMBERS_ONLY,
     },
     {
       desc: "CHARS_AND_NUMBERS",
-      func: () => Constants.CHARS_AND_NUMBERS,
-      result: Constants.CHARS_AND_NUMBERS,
+      func: () => this.CHARS_AND_NUMBERS,
+      result: this.CHARS_AND_NUMBERS,
     },
     {
       desc: "NOT_CHARS_AND_NUMBERS",
-      func: () => Constants.NOT_CHARS_AND_NUMBERS,
-      result: Constants.NOT_CHARS_AND_NUMBERS,
+      func: () => this.NOT_CHARS_AND_NUMBERS,
+      result: this.NOT_CHARS_AND_NUMBERS,
     },
   ]);
 }
