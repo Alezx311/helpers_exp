@@ -1,4 +1,3 @@
 export function longestPalindrome(str: string) {
-
-  const maxLength = str.length
+	const maxLength = str.length
 }

@@ -21,16 +21,15 @@
  * Output: [0,1]
  */
 export function twoSum(input: number[], target: number): [number, number] {
-  const isValid = (value: number, index: number) =>
-    input.some((v, i) => value + v === target && i !== index);
-  const mapped = input.map((value, index) => ({
-    value,
-    index,
-    isValid: isValid(value, index),
-  }));
-  const [r1, r2] = mapped
-    .filter((v) => v.isValid)
-    .map((v) => v.index)
-    .sort((a, b) => (a > b ? 1 : -1));
-  return [r1, r2];
+	const isValid = (value: number, index: number) => input.some((v, i) => value + v === target && i !== index)
+	const mapped = input.map((value, index) => ({
+		value,
+		index,
+		isValid: isValid(value, index)
+	}))
+	const [r1, r2] = mapped
+		.filter((v) => v.isValid)
+		.map((v) => v.index)
+		.sort((a, b) => (a > b ? 1 : -1))
+	return [r1, r2]
 }

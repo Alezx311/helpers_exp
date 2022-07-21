@@ -5,11 +5,11 @@
  */
 
 export function reverseNumber(num: number) {
-  const sign = Math.sign(num);
-  const chars = `${num}`
-    .split("")
-    .reverse()
-    .join("")
-    .replace(/[^0-9]/gim, "");
-  return ~~chars * sign;
+	const sign = Math.sign(num)
+	const chars = `${num}`
+		.split("")
+		.reverse()
+		.join("")
+		.replace(/[^0-9]/gim, "")
+	return ~~chars * sign
 }
