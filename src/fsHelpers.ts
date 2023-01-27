@@ -67,29 +67,8 @@ export const testFileSystem = () => {
 	return true
 }
 
-export const EXAMPLES = Constants.mapExamples([
-	{ desc: "isExists", func: isExists, result: isExists(FILE) },
-	{ desc: "fileStats", func: fileStats, result: fileStats(FILE) },
-	{ desc: "readDir", func: readDir, result: readDir(FILE) },
-	{ desc: "readFile", func: readFile, result: readFile(FILE) },
-	{
-		desc: "writeFile",
-		func: writeFile,
-		result: writeFile(TEST_FILE, "Write Test")
-	},
-	{
-		desc: "appendFile",
-		func: appendFile,
-		result: appendFile(TEST_FILE, "Append Test")
-	},
-	{ desc: "removeFile", func: removeFile, result: removeFile(TEST_FILE) },
-	{ desc: "getContent", func: getContent, result: getContent() },
-	{ desc: "testFileSystem", func: testFileSystem, result: testFileSystem() }
-])
-
 export class FsHelpers {
 	static SOURCE = SOURCE
-	static EXAMPLES = EXAMPLES
 
 	static FILE = FILE
 	static DIR = DIR

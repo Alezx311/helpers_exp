@@ -17,16 +17,9 @@ export const mapKey = (obj: O = OBJ) =>
 		value: obj[key]
 	}))
 
-export const EXAMPLES = Constants.mapExamples([
-	{ desc: "objInspect", func: objInspect, result: objInspect(OBJ) },
-	{ desc: "objToStr", func: objToStr, result: objToStr(OBJ) },
-	{ desc: "objToStrPlain", func: objToStrPlain, result: objToStrPlain(OBJ) },
-	{ desc: "mapKey", func: mapKey, result: mapKey(OBJ) }
-])
 
 export class ObjectHelpers {
 	static SOURCE = SOURCE
-	static EXAMPLES = EXAMPLES
 
 	static objInspect = objInspect
 	static objToStr = objToStr

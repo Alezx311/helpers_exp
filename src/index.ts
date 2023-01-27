@@ -7,27 +7,12 @@ import { NumHelpers } from "./numHelpers"
 import { ObjectHelpers } from "./objHelpers"
 import { PathHelpers } from "./pathHelpers"
 import { StringHelpers } from "./stringHelpers"
-import { TypeHelpers } from "./typeHelpers"
 
 export const SOURCE = Constants.getSource(__filename)
 SOURCE.name = `HelpersMain`
 
-export const EXAMPLES = Constants.mapExamples([
-	...Constants.EXAMPLES,
-	...FuncHelpers.EXAMPLES,
-	...ArrayHelpers.EXAMPLES,
-	...FsHelpers.EXAMPLES,
-	...LogHelpers.EXAMPLES,
-	...NumHelpers.EXAMPLES,
-	...ObjectHelpers.EXAMPLES,
-	...PathHelpers.EXAMPLES,
-	...StringHelpers.EXAMPLES,
-	...TypeHelpers.EXAMPLES
-])
-
 export class Helpers {
 	static SOURCE = SOURCE
-	static EXAMPLES = EXAMPLES
 	static Constants = Constants
 
 	static ArrayHelpers = ArrayHelpers
@@ -37,6 +22,5 @@ export class Helpers {
 	static ObjectHelpers = ObjectHelpers
 	static PathHelpers = PathHelpers
 	static StringHelpers = StringHelpers
-	static TypeHelpers = TypeHelpers
 	static FuncHelpers = FuncHelpers
 }

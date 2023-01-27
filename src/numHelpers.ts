@@ -39,25 +39,10 @@ export const randomArr = (size: N = RANDOM_SIZE, max: N = MAX, min: N = MIN) =>
 		.fill(random())
 		.map((v) => ~~(v * randomInt(max, min)))
 
-export const EXAMPLES = Constants.mapExamples([
-	{ desc: "random", func: random, result: random() },
-	{ desc: "randomInt", func: randomInt, result: randomInt() },
-	{ desc: "randomDate", func: randomDate, result: randomDate() },
-	{ desc: "randomDateStamp", func: randomDateStamp, result: randomDateStamp() },
-	{ desc: "randomString", func: randomString, result: randomString() },
-	{ desc: "randomID", func: randomID, result: randomID() },
-	{ desc: "randomIndex", func: randomIndex, result: randomIndex() },
-	{ desc: "randomElement", func: randomElement, result: randomElement() },
-	{ desc: "randomSort", func: randomSort, result: randomSort() },
-	{ desc: "randomChoose", func: randomChoose, result: randomChoose() },
-	{ desc: "randomBool", func: randomBool, result: randomBool() },
-	{ desc: "randomMany", func: randomMany, result: randomMany() },
-	{ desc: "randomArr", func: randomArr, result: randomArr() }
-])
+
 
 export class NumHelpers {
 	static SOURCE = SOURCE
-	static EXAMPLES = EXAMPLES
 
 	static random = random
 	static randomInt = randomInt

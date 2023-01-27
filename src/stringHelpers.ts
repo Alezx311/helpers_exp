@@ -46,6 +46,15 @@ export const toSubParts = (str: S = STR, filter = isValidStr) => {
 	}
 	return [...new Set(...parts.filter(filter))]
 }
+export const randomString = (length: N = 10) => {
+	let result = ""
+	const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+	const charactersLength = characters.length
+	for (let i = 0; i < length; i++) {
+		result += characters.charAt(Math.floor(Math.random() * charactersLength))
+	}
+	return result
+}
 export const strStat = (str: S = STR) => {
 	const length = toLen(str)
 	const chars = toCharsArray(str)
@@ -59,50 +68,8 @@ export const matchAllInt = (v: S = STR) => isTypeStr(v) && v.match(/[0-9]+/gim)
 export const matchAllSpec = (v: S = STR) => isTypeStr(v) && v.match(/[\\s\\n\\t!@#$%^&*()_+]+/gim)
 export const matchAllLines = (v: S = STR) => isTypeStr(v) && v.match(/^.+$/gim)
 
-export const EXAMPLES = Constants.mapExamples([
-	{ desc: "toDateNow", func: toDateNow, result: toDateNow() },
-	{ desc: "toDateStamp", func: toDateStamp, result: toDateStamp() },
-	{ desc: "toDateISO", func: toDateISO, result: toDateISO() },
-	{ desc: "toType", func: toType, result: toType() },
-	{ desc: "isTypeStr", func: isTypeStr, result: isTypeStr() },
-	{ desc: "isTypeNum", func: isTypeNum, result: isTypeNum() },
-	{ desc: "isTypeFunc", func: isTypeFunc, result: isTypeFunc() },
-	{ desc: "isTypeObj", func: isTypeObj, result: isTypeObj() },
-	{ desc: "isTypeNull", func: isTypeNull, result: isTypeNull() },
-	{ desc: "isTypeUnd", func: isTypeUnd, result: isTypeUnd() },
-	{ desc: "toKey", func: toKey, result: toKey() },
-	{ desc: "toLines", func: toLines, result: toLines() },
-	{ desc: "toTabs", func: toTabs, result: toTabs() },
-	{ desc: "toWords", func: toWords, result: toWords() },
-	{ desc: "toCharsLatin", func: toCharsLatin, result: toCharsLatin() },
-	{ desc: "toCharsValid", func: toCharsValid, result: toCharsValid() },
-	{ desc: "toCharsArray", func: toCharsArray, result: toCharsArray() },
-	{ desc: "toUnical", func: toUnical, result: toUnical() },
-	{ desc: "toReversed", func: toReversed, result: toReversed() },
-	{ desc: "toLen", func: toLen, result: toLen() },
-	{ desc: "toTrimmed", func: toTrimmed, result: toTrimmed() },
-	{ desc: "toObjStr", func: toObjStr, result: toObjStr() },
-	{ desc: "toLongest", func: toLongest, result: toLongest() },
-	{ desc: "isValidStr", func: isValidStr, result: isValidStr() },
-	{ desc: "isValidLength", func: isValidLength, result: isValidLength() },
-	{ desc: "isPalindrome", func: isPalindrome, result: isPalindrome() },
-	{ desc: "isIncludeChars", func: isIncludeChars, result: isIncludeChars() },
-	{ desc: "isTrimmed", func: isTrimmed, result: isTrimmed() },
-	{ desc: "toStats", func: toStats, result: toStats() },
-	{ desc: "toObj", func: toObj, result: toObj() },
-	{ desc: "subStr", func: subStr, result: subStr() },
-	{ desc: "toSubParts", func: toSubParts, result: toSubParts() },
-	{ desc: "strStat", func: strStat, result: strStat() },
-	{ desc: "matchAll", func: matchAll, result: matchAll() },
-	{ desc: "matchAllLatin", func: matchAllLatin, result: matchAllLatin() },
-	{ desc: "matchAllKyr", func: matchAllKyr, result: matchAllKyr() },
-	{ desc: "matchAllInt", func: matchAllInt, result: matchAllInt() },
-	{ desc: "matchAllSpec", func: matchAllSpec, result: matchAllSpec() },
-	{ desc: "matchAllLines", func: matchAllLines, result: matchAllLines() }
-])
 export class StringHelpers {
 	static SOURCE = SOURCE
-	static EXAMPLES = EXAMPLES
 
 	static TEST_VALUES = { SOURCE, ARR, STR, OBJ }
 
